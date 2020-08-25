@@ -5,3 +5,10 @@
  */
 
 // You can delete this file if you're not using it
+
+exports.createPages = ({graphql, actions}) => {
+  const {createPage} = actions;
+  return graphql(allPostsQuery).then(({errors, data}) => {
+    if (errors) return Promise.reject(errors);
+  });
+};

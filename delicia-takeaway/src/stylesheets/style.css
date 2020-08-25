@@ -1,0 +1,31 @@
+body {
+  background-color: #eee;
+}
+
+.main-header {
+  margin-bottom: 1.45rem;
+  background: #fff;
+}
+.main-header .main-header-logo {
+  max-height: 100px;
+  display: block;
+  margin: 0 auto;
+}
+
+.hero-standard {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 350px;
+  height: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.hero-standard a,
+.hero-standard a:hover {
+  color: #fff;
+}
+
+/*# sourceMappingURL=style.css.map */
