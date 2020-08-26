@@ -8,14 +8,16 @@ const Categories = () => {
 
   const categoriesQuery = graphql`
     {
-      craftAPI {
-        category(group: "menu", limit: 10) {
-          ... on CraftAPI_menu_Category {
+      craftAPI  {
+        entries {
+          ... on CraftAPI_categories_categories_Entry {
+            id
             title
-            slug
+            uri
             description
             image {
               ... on CraftAPI_assets_Asset {
+                id
                 url
               }
             }
@@ -29,15 +31,24 @@ const Categories = () => {
 
     console.table(entries);
 
-    
+    entries.map(entry => {
+      if(entry.id !== "" && typeof entry.id !== "undefined"){
+        console.log(entry.id);
+       }
+    })
 
   return (
     <div className="category-listing-wrap"> 
-      
-      <Category />
-      <Category />
-      <Category />
-      <Category />
+      {entries.map(entry => {
+        if(entry.id !== "" && typeof entry.id !== "undefined"){
+          return (
+            <Category
+              props={entry}
+            />
+         )}
+        return null
+      })}
+
 
     </div>
   )

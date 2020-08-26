@@ -1,4 +1,3 @@
-import { Link } from "gatsby"
 import React from "react"
 
 
@@ -10,15 +9,16 @@ const Footer = () => (
     <div className="footer-text-wrap">
       <p>Copyright &copy; Delicia Acai &amp; Protein Bar ®</p>
       <p>
-      <Link
-          to="https://www.facebook.com/deliciahq/"
+      <a
+          href="https://www.facebook.com/deliciahq/"
           target="_blank"
+          rel="noreferrer"
           style={{
             textDecoration: `none`,
           }}
         >
           <img src="/images/facebook-f.svg" alt="Facebook Icon" className="main-footer-icon"/>
-        </Link>
+        </a>
       </p>
     </div>
   </footer>

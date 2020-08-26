@@ -35,7 +35,9 @@ module.exports = {
       options: {
         typeName: 'CraftAPI',
         fieldName: 'craftAPI',
-        url: 'http://takeaway.nightfallstudios.com.au/api'
+        url: 'http://takeaway.nightfallstudios.com.au/api',
+        refetchInterval: 60,
+        batch: true,
       }
     }
   ],

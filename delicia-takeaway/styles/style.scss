@@ -44,7 +44,7 @@ body{
     flex-direction: row;
 
     .category-item{
-        width: 30%;
+        width: 33%;
         height: 200px;
         margin: 0 5px 1rem;
         position: relative;
@@ -53,6 +53,7 @@ body{
         align-items: center;
 
         h3{
+            text-align: center;
             z-index: 2;
             color:#fff;
             font-weight: 500;

@@ -1,23 +1,28 @@
 import { Link } from "gatsby"
 import React from "react"
 
+const Category = (key) => {
 
-const Category = (title) => (
-  <div
+  console.log(key.props);
+
+  return(
+    <div
     className="category-item"
     style={{ 
-      'background-image': "url('/images/main-hero.jpg')"
+      'backgroundImage': "url('/images/main-hero.jpg')"
     }}
   >
       <Link
-        to=""
+        to={key.props.uri}
         className="thumb-link"
       >
       </Link>
       <h3>
-        Category name
+        {key.props.title}
       </h3>
   </div>
-)
+  )
+}
+
 
 export default Category
