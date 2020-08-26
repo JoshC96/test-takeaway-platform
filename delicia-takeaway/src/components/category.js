@@ -2,20 +2,21 @@ import { Link } from "gatsby"
 import React from "react"
 
 
-const Category = (props) => (
+const Category = (title) => (
   <div
-    className="category"
+    className="category-item"
     style={{ 
       'background-image': "url('/images/main-hero.jpg')"
     }}
   >
-      <h2 style={{ margin: 0 }}>
-        <Link
-          to="/"
-        >
-          {props}
-        </Link>
-      </h2>
+      <Link
+        to=""
+        className="thumb-link"
+      >
+      </Link>
+      <h3>
+        Category name
+      </h3>
   </div>
 )
 

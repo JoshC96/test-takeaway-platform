@@ -1,5 +1,7 @@
-import { Link, graphql, useStaticQuery } from "gatsby"
+import { graphql, useStaticQuery } from "gatsby"
 import React from "react"
+
+import Category from "./category"
 
 
 const Categories = () => {
@@ -31,11 +33,15 @@ const Categories = () => {
 
   return (
     <div className="category-listing-wrap"> 
-      <Link to="/">
-        Select a Location
-      </Link>
+      
+      <Category />
+      <Category />
+      <Category />
+      <Category />
+
     </div>
   )
 }
+
 
 export default Categories

@@ -2,6 +2,15 @@ body{
     background-color: #eee;
 }
 
+.thumb-link{
+    position: absolute;
+    left: 0;
+    right:0;
+    top:0;
+    bottom:0;
+    z-index: 3;
+}
+
 .main-header{
     margin-bottom: 1.45rem;
     background: #fff;
@@ -22,9 +31,56 @@ body{
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin-bottom: 1rem;
 
     a,
     a:hover{
         color: #fff;
+    }
+}
+
+.category-listing-wrap{
+    display: flex;
+    flex-direction: row;
+
+    .category-item{
+        width: 30%;
+        height: 200px;
+        margin: 0 5px 1rem;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        h3{
+            z-index: 2;
+            color:#fff;
+            font-weight: 500;
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        &:after{
+            content: ' ';
+            position: absolute;
+            background: rgba(0,0,0,0.5);
+            left: 0;
+            right:0;
+            top:0;
+            bottom:0;
+            z-index: 1;
+        }
+    }
+}
+
+
+.footer{
+    .footer-text-wrap{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .main-footer-icon{
+        width: 15px;
     }
 }
