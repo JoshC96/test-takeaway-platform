@@ -21,6 +21,10 @@ https://www.gatsbyjs.com/docs/quick-start/
 
 https://dimitr.im/gatsby-craft-cms
 
+## Creating pages with Gatsby
+
+https://dimitr.im/creating-pages-with-gatsby
+
 ## Sass commands
 
 Sass run command from ./delicia-takeaway directory:
@@ -30,8 +34,8 @@ Sass run command from ./delicia-takeaway directory:
 
 ## Craft Details
 
-GraphQL is set up to make API requests to this url:
-# http://takeaway.nightfallstudios.com.au/admin/graphql/schemas
+### GraphQL is set up to make API requests to this url:
+http://takeaway.nightfallstudios.com.au/admin/graphql/schemas
 
 Login Details: 
 admin
