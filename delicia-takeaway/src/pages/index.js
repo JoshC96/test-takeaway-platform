@@ -12,6 +12,10 @@ const IndexPage = () => (
 
     <Categories />
 
+    <div className="footer-image-wrap">
+      <img src="/images/planet-over-profit.png" alt="Planet Over Profit - People over Numbers" className="main-footer-logo"/>
+    </div>
+
   </Layout>
 )
 

@@ -2,6 +2,14 @@ body {
   background-color: #eee;
 }
 
+main {
+  min-height: 80vh;
+}
+
+img {
+  max-width: 100%;
+}
+
 .thumb-link {
   position: absolute;
   left: 0;
@@ -38,15 +46,45 @@ body {
   color: #fff;
 }
 
+.grid-item-wrap {
+  margin-bottom: 1rem;
+  position: relative;
+  display: block;
+  width: 100%;
+  flex: 0 0 33.333333%;
+  max-width: 33.333333%;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+@media only screen and (max-width: 768px) {
+  .grid-item-wrap {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+@media only screen and (max-width: 546px) {
+  .grid-item-wrap {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+.grid-item-wrap .grid-item-image {
+  position: relative;
+}
+.grid-item-wrap .grid-item-image img {
+  margin-bottom: 1rem;
+}
+
 .category-listing-wrap {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  margin-left: -10px;
+  margin-right: -10px;
 }
 .category-listing-wrap .category-item {
-  width: 33%;
-  height: 200px;
-  margin: 0 5px 1rem;
   position: relative;
+  height: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -70,11 +108,63 @@ body {
   z-index: 1;
 }
 
-.footer .footer-text-wrap {
+.product-listing-wrap {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.product-listing-wrap .grid-item-wrap {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+@media only screen and (max-width: 546px) {
+  .product-listing-wrap .grid-item-wrap {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+.product-listing-wrap .product-price {
   display: flex;
   justify-content: space-between;
 }
-.footer .main-footer-icon {
+
+.cart-button {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  background-color: #222;
+}
+
+.cart-add {
+  border: none;
+  height: 0;
+  line-height: 0;
+  padding: 0;
+  outline: none;
+}
+.cart-add img {
+  margin: 0;
+  width: 25px;
+}
+
+footer {
+  background-color: #fff;
+}
+footer .footer {
+  margin: 0px auto;
+  max-width: 960px;
+  padding: 1.45rem 1.0875rem;
+}
+footer .footer .footer-text-wrap {
+  display: flex;
+  justify-content: space-between;
+}
+footer .footer .footer-text-wrap p {
+  margin: 0;
+}
+footer .footer .main-footer-icon {
   width: 15px;
 }
 
