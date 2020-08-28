@@ -139,6 +139,7 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
+  user-select: none;
 }
 .cart-button img {
   margin: 0;

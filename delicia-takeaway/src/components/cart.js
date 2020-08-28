@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from 'react';
 
 import CartItem from "./cart-item"
 
@@ -21,13 +21,19 @@ const Cart = () => {
     }
 
     const cartItems = getCartItems();
+    const [isOpened, setIsOpened] = useState(false);
+
+    function toggle() {
+        setIsOpened(wasOpened => !wasOpened);
+    }
 
     return(
         <>
-            <div className="cart-button">
+            <div className="cart-button" onClick={toggle} >
                 <img className="cart-icon" src="/images/icon-cart.svg" alt="Cart icon" />
             </div>
-            <div className="cart-wrap">
+            {isOpened && (
+                <div className="cart-wrap">
                 <h3>Your Order</h3>
 
                 {cartItems.map((cartItem, index) => {
@@ -45,6 +51,8 @@ const Cart = () => {
                 </div>
 
             </div>
+            )}
+            
         </>
     )
 }
