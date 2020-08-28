@@ -5,14 +5,18 @@ import SEO from "../components/seo"
 const ProductPage = ({ pageContext }) => {
 
   const { item } = pageContext;
-  return(
-    <Layout>
-      <SEO title="Product" />
+
+  if(typeof item !== "undefined"){
+    return(
+      <Layout>
+        <SEO title="Product" />
+      
+        <h1>{item.title}</h1>
     
-      <h1>{item.title}</h1>
-  
-    </Layout>
-  )
+      </Layout>
+    )
+  }
+  return null
 
 }
 

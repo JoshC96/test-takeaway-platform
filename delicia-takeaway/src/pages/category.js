@@ -13,7 +13,7 @@ const CategoryPage = ({ pageContext }) => {
     <Layout>
       <SEO title="Category" />
   
-      <Products relatedTo={item.id} />
+      <Products relatedTo={item} />
   
     </Layout>
   )

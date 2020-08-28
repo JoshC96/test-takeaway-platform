@@ -4,7 +4,7 @@ import CartItem from "./cart-item"
 
 const Cart = () => {
 
-    getCartItems = function(){
+    let getCartItems = function(){
         let cartItems = [{
             title: "Tropic Thunder",
             price: 6.5,

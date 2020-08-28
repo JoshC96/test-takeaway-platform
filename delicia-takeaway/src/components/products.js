@@ -40,12 +40,15 @@ const Products = (data) => {
         .filter(entry => (typeof entry.menuCategory !== "undefined"))
         .filter(entry => (typeof entry.menuCategory[0] !== "undefined"))
         .map(entry => {
-          if(entry.menuCategory[0].id === data.relatedTo){
-            return (
-              <ProductItem
-                props={entry}
-              />
-            )
+          if(typeof data.relatedTo !== "undefined"){
+            if(entry.menuCategory[0].id === data.relatedTo.id){
+              return (
+                <ProductItem
+                  props={entry}
+                />
+              )
+            }
+            return null;
           }
           return null;
       })}

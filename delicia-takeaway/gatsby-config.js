@@ -1,7 +1,12 @@
 module.exports = {
+  // PROXY IS FOR API ROUTES SO THEY AREN'T TREATED AS STATIC ASSETS
+  // proxy: {
+  //   prefix: "/users",
+  //   url: "http://localhost:8000", // UPDATE THIS URL ON DEPLOYMENT
+  // },
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
+    title: `Delicia Acai`,
+    description: `The home of Delicia Acai & Protein Bar in Australia!`,
     author: `@gatsbyjs`,
   },
   plugins: [
@@ -36,8 +41,14 @@ module.exports = {
         typeName: 'CraftAPI',
         fieldName: 'craftAPI',
         url: 'http://takeaway.nightfallstudios.com.au/api',
-        refetchInterval: 60,
+        refetchInterval: 300, // WILL RETRIEVE NEW DATA EVERY 5 MINUTES
         batch: true,
+      }
+    },
+    {
+      resolve: 'gatsby-plugin-express',
+      options: {
+        output: 'config/gatsby-express.json',
       }
     }
   ],
