@@ -31,10 +31,11 @@ const Categories = () => {
 
   return (
     <div className="category-listing-wrap"> 
-      {entries.map(entry => {
+      {entries.map((entry, index) => {
         if(entry.id !== "" && typeof entry.id !== "undefined"){
           return (
             <CategoryItem
+              key={index}
               props={entry}
             />
          )}

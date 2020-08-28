@@ -1,6 +1,10 @@
 ## Delicia Takeaway Gatsby + Craft GraphQL
 
-Gatsby run develop environment on localhost:8000:
+REQUIRES Gatbsy cli installed locally:
+
+``` npm install -g gatsby-cli ```
+
+MAIN USAGE - Gatsby run develop environment on localhost:8000:
 
 ```gatsby develop```
 
@@ -42,13 +46,24 @@ admin
 f7y^$%XM8h7f
 
 
-Configuration found in ./delicia-takeaway/gatsby-config.js
+Configuration found in /delicia-takeaway/gatsby-config.js
 
-```{
+```
+{
     resolve: `gatsby-source-graphql`,
     options: {
     typeName: 'CraftAPI',
     fieldName: 'craftAPI',
     url: 'http://takeaway.nightfallstudios.com.au/api'
     }
-}```
+}
+```
+
+
+## Server information found in server.js
+
+cd to delicia-takeaway then run:
+
+``` node server.js ```
+
+This will serve the gatbsy project but won't update the project on save, use "gatbsy develop" for that

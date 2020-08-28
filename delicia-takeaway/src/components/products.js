@@ -39,11 +39,12 @@ const Products = (data) => {
       {entries
         .filter(entry => (typeof entry.menuCategory !== "undefined"))
         .filter(entry => (typeof entry.menuCategory[0] !== "undefined"))
-        .map(entry => {
+        .map((entry, index) => {
           if(typeof data.relatedTo !== "undefined"){
             if(entry.menuCategory[0].id === data.relatedTo.id){
               return (
                 <ProductItem
+                  key={index}
                   props={entry}
                 />
               )
