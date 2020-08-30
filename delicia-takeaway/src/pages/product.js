@@ -1,12 +1,11 @@
 import React from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import Image from "../components/image"
 
 const ProductPage = ({ pageContext }) => {
 
   const { item } = pageContext;
-
-  console.log(item.image[0].url);
 
   if(typeof item !== "undefined"){
     return(
@@ -16,7 +15,8 @@ const ProductPage = ({ pageContext }) => {
         <h1>{item.title}</h1>
         <h3>${item.price}</h3>
 
-        <img src={item.image[0].url} alt={item.title}></img>
+
+        <Image src={item} alt={item.title} />
 
         <p>{item.description}</p>
 

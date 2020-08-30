@@ -1,6 +1,20 @@
-import React from "react"
+import React, { useRef } from "react";
+import { useCartContext } from "../../server/cart-state";
 
-const CartItem = (details) => {
+  const CartItem = (details) => {
+
+  const inputRef = useRef();
+  const [_, dispatch] = useCartContext();
+
+  const handleClick = (e) => {
+    e.preventDefault();
+
+    dispatch({
+      type: "add",
+      name: inputRef.current.value
+    });
+    inputRef.current.value = "";
+  }
 
   return(
     <div className="cart-item">
@@ -16,9 +30,11 @@ const CartItem = (details) => {
           <span>
             ${details.props.price}
           </span>
-          {/* <button className="cart-remove">
+          
+          <div className="cart-remove">
+            <input type="text" ref={inputRef} defaultValue={details.props.id} onClick={handleClick} />
             <img src="/images/icon-plus.svg" alt="Remove from cart" />
-          </button> */}
+          </div>
 
         </div>
 

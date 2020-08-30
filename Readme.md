@@ -67,3 +67,13 @@ cd to delicia-takeaway then run:
 ``` node server.js ```
 
 This will serve the gatbsy project but won't update the project on save, use "gatbsy develop" for that
+
+
+## Ecommerce starter example with Stripe (highly recommend)
+
+https://www.gatsbyjs.com/starters/brxck/gatsby-starter-stripe/
+
+## Issue with action dispatch
+
+When updating cart with effect/reducers an issue with Dispatch not being found occurs:
+https://github.com/gatsbyjs/gatsby/issues/20082

@@ -6,12 +6,14 @@ const Cart = () => {
 
     let getCartItems = function(){
         let cartItems = [
-            {
+            {   
+                id: "001",
                 title: "Tropic Thunder",
                 price: 6.5,
                 quantity: "2"
             },
             {
+                id: "002",
                 title: "The Original",
                 price: 9.8,
                 quantity: "1"

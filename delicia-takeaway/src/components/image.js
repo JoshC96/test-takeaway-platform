@@ -15,19 +15,27 @@ import Img from "gatsby-image"
 
 const Image = (props) => {
 
-  const data = useStaticQuery(graphql`
-    query {
-      placeholderImage: file(relativePath: { eq: "Delicia-Logo.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 400, maxHeight: 250) {
-            ...GatsbyImageSharpFluid
-          }
-        }
-      }
-    }
-  `)
+  // const data = useStaticQuery(graphql`
+  //   query {
+  //     placeholderImage: file(relativePath: { eq: "Delicia-Logo.png" }) {
+  //       childImageSharp {
+  //         fluid(maxWidth: 400, maxHeight: 250) {
+  //           ...GatsbyImageSharpFluid
+  //         }
+  //       }
+  //     }
+  //   }
+  // `)
+  if(typeof props.image != "undefined"){
+    if(typeof props.image[0]!= "undefined"){
+      const imageUrl = "http://http://takeaway.nightfallstudios.com.au" + props.src; 
 
-  return <Img className={props.className} fluid={data.placeholderImage.childImageSharp.fluid} />
+      return <Img className={props.className} fluid={imageUrl} />
+    }
+  }
+  return null;
+
+  
 }
 
 export default Image

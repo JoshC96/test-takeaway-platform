@@ -1,8 +1,3 @@
-# ARUZA IGNORED FILES
-server-back/
-.env
-
-
 # Logs
 logs
 *.log
@@ -61,7 +56,6 @@ typings/
 
 # gatsby files
 .cache/
-public
 
 # Mac files
 .DS_Store

@@ -13,7 +13,7 @@ const Hero = () => (
         <Link
           to="/"
         >
-          Select a Location
+          Delicia Acai Bowls
         </Link>
       </h2>
   </div>
