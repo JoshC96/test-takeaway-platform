@@ -1,31 +1,36 @@
-import React from "react"
+import React, { useState, useEffect } from "react";
+import API from "../routes/api";
+
 import Layout from "../components/layout"
-import SEO from "../components/seo"
+import ProductDetail from "../components/product-detail"
 
-const Product = ({ pageContext }) => {
+const Product = () => {
 
-  const { item } = pageContext;
+  const [productEntry, setProduct] = useState([]);
+  const productUri = window.location.pathname;
+  let productId = productUri.substring(productUri.lastIndexOf('/') + 1);
 
-  if(typeof item !== "undefined"){
+  useEffect(() => {
+      loadProduct()
+  }, [])
+
+  function loadProduct(){
+      API.productsById(productId)
+      .then(res => setProduct(res.data))
+      .catch(err => console.log(err));
+  };
+
+
     return(
       <Layout>
-        <SEO title={item.title} />
-      
-        <h1>{item.title}</h1>
-        <h3>${item.price}</h3>
-
-
-        {/* <Image src={item} alt={item.title} /> */}
-
-        <p>{item.description}</p>
-
-        <button> Add to cart </button>
-        
-    
+          {productEntry.length ? (
+            <ProductDetail entry={productEntry[0]} />        
+            ) : (
+              <h3></h3>
+          )}
       </Layout>
     )
-  }
-  return null
+
 
 }
 

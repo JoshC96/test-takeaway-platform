@@ -1,13 +1,26 @@
+const axiosInstance = require("../routes/axiosInstance");
+
 // Defining methods for the API WRAP
 module.exports = {
-  findAll: function(req, res) {
-    return {title:"thing"}
+  allProducts: function(req, res) {
+    axiosInstance
+      .get('/api/products.json')
+      .then(function (response) {
+        return res.json(response.data);
+      });
   },
-  findById: function(req, res) {
-    console.log("reached find by ID")
-  }
-  ,
-  findByCat: function(req, res) {
-    console.log("reached find by cat")
+  productsById: function(req, res) {
+    axiosInstance
+      .get('/api/products.json?id='+req.query.id)
+      .then(function (response) {
+        return res.json(response.data);
+      });
+  },
+  productsByCategory: function(req, res) {
+    axiosInstance
+      .get('/api/products.json?category='+req.query.id)
+      .then(function (response) {
+        return res.json(response.data);
+      });
   }
 };
