@@ -10,7 +10,14 @@ export default {
   productsByCategory: function(id) {
     return axios.get('/api/products/category?id='+id)
   },
+  productsInCart: function(cart) {
+    let cartString = JSON.parse(cart).join();
+    return axios.get('/api/products/cart?cart='+cartString)
+  },
   allCategories: function() {
     return axios.get('/api/categories')
+  },
+  getStripeSecret: function(amountToCharge) {
+    return axios.get('/stripe/secret?amount='+amountToCharge)
   }
 };

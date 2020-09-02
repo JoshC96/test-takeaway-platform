@@ -22,7 +22,9 @@ const Products = (data) => {
           })}
         </>
       ) : (
-          <h3></h3>
+          <>
+            {/* ERROR LOG HERE */}
+          </>
       )}
       
     </div>

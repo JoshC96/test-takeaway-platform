@@ -22,5 +22,12 @@ module.exports = {
       .then(function (response) {
         return res.json(response.data);
       });
+  },
+  productsInCart: function(req, res) {
+    axiosInstance
+      .get('/api/cart.json?cart='+req.query.cart)
+      .then(function (response) {
+        return res.json(response.data);
+      });
   }
 };

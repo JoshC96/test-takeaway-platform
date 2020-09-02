@@ -7,7 +7,9 @@ const CategoryItem = (key) => {
       <div
         className="category-item"
         style={{ 
-          'backgroundImage': "url('/images/main-hero.jpg')"
+          'backgroundImage': "url('"+key.props.imageUrl+"')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
         }}
       >
         <a

@@ -1,10 +1,12 @@
 import React from "react";
 import SEO from "../components/seo"
-
+import cartFunc from "../functions/localStorage"
 
 const ProductDetail = (props) => {
 
-    console.log(props.entry);
+    const addToCart = () =>{
+        cartFunc.addToCart(props.entry.id);
+    }
 
     return(
         <>
@@ -18,7 +20,7 @@ const ProductDetail = (props) => {
 
             <p>{props.entry.description}</p>
 
-            <button> Add to cart </button>
+            <button onClick={addToCart}> Add to cart </button>
         </>
     )
 }

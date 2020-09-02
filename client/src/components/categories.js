@@ -19,14 +19,22 @@ const Categories = () => {
 
   return (
     <div className="category-listing-wrap"> 
-      {categories.map((entry, index) => {
-        return (
-          <CategoryItem
-            key={index}
-            props={entry}
-          />
-        )
-      })}
+      {categories.length ? (
+        <>
+          {categories.map((entry, index) => {
+            return (
+              <CategoryItem
+                key={index}
+                props={entry}
+              />
+            )
+          })}
+        </>
+      ) : (
+          <>
+            {/* ERROR LOG HERE */}
+          </>
+      )}
     </div>
   )
 }

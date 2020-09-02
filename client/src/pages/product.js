@@ -26,7 +26,9 @@ const Product = () => {
           {productEntry.length ? (
             <ProductDetail entry={productEntry[0]} />        
             ) : (
-              <h3></h3>
+              <>
+                {/* ERROR LOG HERE */}
+              </>
           )}
       </Layout>
     )
