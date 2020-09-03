@@ -1,79 +1,77 @@
-## Delicia Takeaway Gatsby + Craft GraphQL
+## Delicia Takeaway React + NodeJS Server
 
-REQUIRES Gatbsy cli installed locally:
+Folder Structure:
 
-``` npm install -g gatsby-cli ```
+Server initialized in server.js, routes to communicate with Craft API and Stripe found in routes/, controller for Axios get functions are found in apiController/
 
-MAIN USAGE - Gatsby run develop environment on localhost:8000:
-
-```gatsby develop```
-
-Create a production build
-
-```gatsby build```
-
-Serve the production build locally
-
-```gatsby serve```
+React app lives in client/ directory.
 
 
-Quick start docs:
-https://www.gatsbyjs.com/docs/quick-start/
+## React + React Router
+
+The react app uses React Router to handle page routes, below is the App.js routing system:
+
+```
+function App() {
+  // INITIALIZE CART ON APP LOAD
+  CartFunc.initCart();
+
+  return (
+    <Router>
+      <div>
+        <Switch>
+          <Route exact path={["/", "/categories"]}>
+            <HomePage />
+          </Route>
+          <Route exact path="/categories/:id">
+            <Category />
+          </Route>
+          <Route exact path="/product/:id">
+            <Product />
+          </Route>
+          <Route exact path="/cart">
+            <Cart />
+          </Route>
+          <Route exact path="/checkout">
+            <Checkout />
+          </Route>
+          <Route>
+            <NotFound />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+  );
+}
+```
+
+When the app routes to "/" or "/categories" the HomePage will be loaded, when an ID is provided with "categories" or "product" then the respective component will be loaded. 
+
+When a route doesn't exist the user sees 404 page, this is also great for security as the proxy for the server requests is harder to find. 
 
 
-## Craft CMS + GraphQL useful information:
-
-https://dimitr.im/gatsby-craft-cms
-
-## Creating pages with Gatsby
-
-https://dimitr.im/creating-pages-with-gatsby
 
 ## Sass commands
 
-Sass run command from ./delicia-takeaway directory:
+Sass run command from ./client directory:
 
 ```sass --watch styles:src/stylesheets```
 
 
 ## Craft Details
 
-### GraphQL is set up to make API requests to this url:
-http://takeaway.nightfallstudios.com.au/admin/graphql/schemas
+### API routes are set up to make API requests to this url:
+http://takeaway.nightfallstudios.com.au/
 
 Login Details: 
 admin
 f7y^$%XM8h7f
 
 
-Configuration found in /delicia-takeaway/gatsby-config.js
-
-```
-{
-    resolve: `gatsby-source-graphql`,
-    options: {
-    typeName: 'CraftAPI',
-    fieldName: 'craftAPI',
-    url: 'http://takeaway.nightfallstudios.com.au/api'
-    }
-}
-```
-
-
 ## Server information found in server.js
 
 cd to delicia-takeaway then run:
 
-``` node server.js ```
+``` npm run start ```
 
-This will serve the gatbsy project but won't update the project on save, use "gatbsy develop" for that
-
-
-## Ecommerce starter example with Stripe (highly recommend)
-
-https://www.gatsbyjs.com/starters/brxck/gatsby-starter-stripe/
-
-## Issue with action dispatch
-
-When updating cart with effect/reducers an issue with Dispatch not being found occurs:
-https://github.com/gatsbyjs/gatsby/issues/20082
+This will run the server + build and serve the React app
