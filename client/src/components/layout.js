@@ -5,6 +5,7 @@ import Header from "./header"
 import Footer from "./footer"
 import "../index.css"
 import '../App.css';
+import CartButton from "./cart-button"
 
 
 const Layout = ({ children }) => {
@@ -17,10 +18,12 @@ const Layout = ({ children }) => {
           margin: `0 auto`,
           maxWidth: 960,
           padding: `0 1.0875rem 1.45rem`,
+          position: `relative`
         }}
       >
         <main>{children}</main>
 
+        <CartButton />
       </div>
       <Footer />
     </>

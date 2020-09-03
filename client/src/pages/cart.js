@@ -42,9 +42,11 @@ function Cart() {
                 </>
                 ) : (
                     <>
+                        <h3>Empty</h3>
                     </>
                 )}
             </ul>
+            <a href="/checkout" className="btn">Checkout</a>
         </Layout>
     )
 }

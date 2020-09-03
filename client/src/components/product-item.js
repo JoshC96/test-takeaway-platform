@@ -9,12 +9,14 @@ const ProductItem = (key) => {
   // THAT LOOKS LIKE '/categories/acai-bowls/products/summer-dreaming/'
   const productLink = "/" + key.props.uri;
 
+  let imageUrl = key.props.imageUrl !== "" ? key.props.imageUrl : hero;
+
   return(
     <div className="grid-item-wrap">
       <div className="product-item">
         <div className="grid-item-image">
           <a href={productLink} className="thumb-link" aria-label={key.props.title}></a>
-          <img src={hero} alt={key.props.title} />
+          <img src={imageUrl} alt={key.props.title} />
         </div>
         <div className="product-details">
           <h3>
