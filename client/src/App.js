@@ -1,7 +1,7 @@
 // MODULES
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import CartFunc from "./functions/localStorage.js"
+import CartFunc from "./functions/cart-functions.js"
 
 // PAGES
 import HomePage from "./pages/home"

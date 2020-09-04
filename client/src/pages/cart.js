@@ -1,7 +1,7 @@
 // MODULES
 import React, { useState, useEffect } from "react";
 import API from "../routes/api";
-import cartFunc from "../functions/localStorage";
+import cartFunc from "../functions/cart-functions";
 
 // COMPONENTS
 import Layout from "../components/layout"
@@ -25,6 +25,16 @@ function Cart() {
         .catch(err => console.log(err));
     };
 
+    const addToCart = (event) =>{
+        let id = parseInt(event.currentTarget.getAttribute('data-item-id'));
+        cartFunc.addToCart(id);
+    }
+
+    const removeFromCart = (event) =>{
+        let id = parseInt(event.currentTarget.getAttribute('data-item-id'));
+        cartFunc.removeFromCart(id);
+    }
+
     return (
         <Layout>
             <SEO title="Cart" />
@@ -35,7 +45,9 @@ function Cart() {
                     {cart.map((item, index) => {
                         return (
                         <li>
-                            {item.title} - ${item.price}
+                            {item.title} - ${item.price} - 
+                            <button onClick={addToCart} data-item-id={item.id} >Add 1</button> - 
+                            <button onClick={removeFromCart} data-item-id={item.id} >Remove 1</button>
                         </li>
                         )
                     })}

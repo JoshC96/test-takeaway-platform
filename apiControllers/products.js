@@ -4,7 +4,7 @@ const axiosInstance = require("../routes/axiosInstance");
 module.exports = {
   allProducts: function(req, res) {
     axiosInstance
-      .get('/api/products.json')
+      .get('/api/products.json?transform=1')
       .then(function (response) {
         return res.json(response.data);
       });
@@ -18,7 +18,7 @@ module.exports = {
   },
   productsByCategory: function(req, res) {
     axiosInstance
-      .get('/api/products.json?category='+req.query.id)
+      .get('/api/products.json?transform=1&category='+req.query.id)
       .then(function (response) {
         return res.json(response.data);
       });

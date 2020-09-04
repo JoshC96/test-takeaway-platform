@@ -1,5 +1,6 @@
 body {
   background-color: #eee;
+  font-family: sans-serif;
 }
 
 main {
@@ -256,6 +257,62 @@ footer .footer .main-footer-icon {
   float: left;
   margin-left: 12px;
   margin-top: 28px;
+}
+
+.cart-toolbar {
+  padding: 1rem;
+  background-color: #4A7328;
+  position: fixed;
+  width: 100%;
+  bottom: -104px;
+  z-index: 9;
+}
+.cart-toolbar button {
+  background: none;
+  border: 3px solid #FFFFFF;
+  box-sizing: border-box;
+  border-radius: 25px;
+  width: auto;
+  padding: 7px 15px 7px 40px;
+  display: inline-block;
+  position: relative;
+}
+.cart-toolbar button img {
+  margin: 0;
+  margin-right: 8px;
+  max-height: 25px;
+  max-width: 25px;
+  position: absolute;
+  left: 9px;
+}
+.cart-toolbar button span {
+  color: #fff;
+}
+
+.cart-view {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 1rem;
+  background-color: #4A7328;
+  position: fixed;
+  width: 100%;
+  max-height: 553px;
+  overflow-y: scroll;
+  bottom: 82px;
+  z-index: 9;
+}
+.cart-view *:not(input) {
+  color: #fff;
+}
+.cart-view .cart-item {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid white;
+  margin-bottom: 1rem;
+}
+.cart-view .cart-item p {
+  font-size: 14px;
 }
 
 /*# sourceMappingURL=app.css.map */

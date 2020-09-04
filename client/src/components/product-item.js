@@ -2,6 +2,7 @@ import React from "react"
 
 import iconPlus from '../images/icon-plus.svg';
 import hero from '../images/main-hero.jpg';
+import cartFunc from "../functions/cart-functions"
 
 const ProductItem = (key) => {
 
@@ -10,6 +11,10 @@ const ProductItem = (key) => {
   const productLink = "/" + key.props.uri;
 
   let imageUrl = key.props.imageUrl !== "" ? key.props.imageUrl : hero;
+
+  const addToCart = () =>{
+    cartFunc.addToCart(key.props.id);
+  }
 
   return(
     <div className="grid-item-wrap">
@@ -30,7 +35,7 @@ const ProductItem = (key) => {
             <span>
               ${key.props.price}
             </span>
-            <button className="cart-add">
+            <button className="cart-add" onClick={addToCart}>
               <img src={iconPlus} alt="Add to cart" />
             </button>
 

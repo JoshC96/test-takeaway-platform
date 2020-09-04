@@ -1,6 +1,6 @@
 import React from "react";
 import SEO from "../components/seo"
-import cartFunc from "../functions/localStorage"
+import cartFunc from "../functions/cart-functions"
 
 const ProductDetail = (props) => {
 

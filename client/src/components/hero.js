@@ -10,7 +10,7 @@ const Hero = () => (
   >
       <h2 style={{ margin: 0 }}>
         <a
-          href="/acai-bowls"
+          href="/categories/24"
         >
           Delicia Acai Bowls
         </a>

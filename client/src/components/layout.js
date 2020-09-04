@@ -1,11 +1,12 @@
-import React from "react"
-import PropTypes from "prop-types"
+import React from "react";
+import PropTypes from "prop-types";
 
-import Header from "./header"
-import Footer from "./footer"
-import "../index.css"
+import Header from "./header";
+import Footer from "./footer";
+import "../index.css";
 import '../App.css';
-import CartButton from "./cart-button"
+import CartButton from "./cart-button";
+import CartSection from "./cart-section";
 
 
 const Layout = ({ children }) => {
@@ -22,9 +23,8 @@ const Layout = ({ children }) => {
         }}
       >
         <main>{children}</main>
-
-        <CartButton />
       </div>
+      <CartSection />
       <Footer />
     </>
   )

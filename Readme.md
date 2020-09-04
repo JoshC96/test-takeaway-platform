@@ -55,7 +55,7 @@ When a route doesn't exist the user sees 404 page, this is also great for securi
 
 Sass run command from ./client directory:
 
-```sass --watch styles:src/stylesheets```
+```sass --watch styles:src```
 
 
 ## Craft Details
