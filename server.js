@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require("express");
 const routes = require("./routes");
+const cronJobs = require("./cron_jobs");
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -15,6 +16,9 @@ app.use(routes);
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
+
+// Add database-less CRON jobs - THIS JUST RUNS
+cronJobs;
 
 // Start the API server
 app.listen(PORT, function() {

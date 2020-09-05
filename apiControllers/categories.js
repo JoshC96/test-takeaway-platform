@@ -1,13 +1,13 @@
-const axiosInstance = require("../routes/axiosInstance");
-
+const fs = require("fs");
 
 module.exports = {
   allCategories: function(req, res) {
-    axiosInstance
-      .get('/api/categories.json')
-      .then(function (response) {
-        return res.json(response.data);
-      });
+    fs.readFile('./client/shop_data/allCategories.txt', function read(err, data) {
+      if (err) {
+          throw err;
+      }
+      return res.json(JSON.parse(data));
+    });
   }
 };
 
