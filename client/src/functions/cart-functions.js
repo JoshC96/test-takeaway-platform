@@ -22,25 +22,9 @@ export default {
         }
         localStorage.setItem("userCart", JSON.stringify(cart));
     },
-    getCartTotal: function(){
-        let currentCart = localStorage.getItem("userCart");
-        let cartTotal = parseFloat('0.00');
-
-        API.productsInCart(currentCart)
-            .then(function(res){
-                JSON.parse(currentCart).forEach(element => {
-                    res.data.forEach(product => {
-                        if(element === product.id){
-                            cartTotal = cartTotal+parseFloat(product.price)
-                        }
-                    });
-                });
-
-                return cartTotal.toFixed(2);
-
-            }).catch(function(err){
-                console.log("Error getting total")
-                console.log(err)
-            });
+    getCartTotal: function(products){
+        let total = parseFloat('0.00');
+        products.forEach(element=>total+=parseFloat(element.price));
+        return total.toFixed(2);
     }
 };

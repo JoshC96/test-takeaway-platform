@@ -4,9 +4,33 @@ import cartFunc from "../functions/cart-functions"
 
 const ProductDetail = (props) => {
 
-    const addToCart = () =>{
+    const handleSubmit = (e) =>{
+        e.preventDefault();
         cartFunc.addToCart(props.entry.id);
     }
+
+    let addonsArray = typeof props.entry.addOns === "undefined" ? [] : props.entry.addOns;
+
+    const addonList = addonsArray.map((productAddOnsObj) => {
+        return (
+            <div className="product-addon">
+                <p>{productAddOnsObj.addOnName}</p>
+                {Object.entries(productAddOnsObj.variations).map(([key,value])=>{
+                    return(
+                        <>
+                            <label htmlFor={key}>
+                                {value.variationName} : ${value.variationPrice}
+                                <input type="checkbox" id={key} />
+                            </label>
+                        </>
+                    )
+                })}
+            </div>
+        );
+    })
+    
+    
+    
 
     return(
         <>
@@ -20,7 +44,14 @@ const ProductDetail = (props) => {
 
             <p>{props.entry.description}</p>
 
-            <button onClick={addToCart}> Add to cart </button>
+            <form onSubmit={handleSubmit}>
+
+                <h4>Add ons</h4>
+                {addonList}
+
+
+                <input type="submit" value="Add to cart" />
+            </form>
         </>
     )
 }

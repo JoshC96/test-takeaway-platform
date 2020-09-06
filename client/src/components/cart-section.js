@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import cartFunc from "../functions/cart-functions"
+import API from "../routes/api"
 
 import CartView from "./cart-view"
 import iconClock from "../images/icon-clock.svg"
 import iconCart from "../images/icon-cart.svg"
 import iconMarker from "../images/icon-map-marker.svg"
-import cartFunc from "../functions/cart-functions"
 
 const CartSection = (props) => {
     
@@ -18,8 +19,16 @@ const CartSection = (props) => {
     }, [])
 
     const getTotal = () => { 
-        setTotal(cartFunc.getCartTotal());
+        API.productsInCart(cartFunc.getCart())
+        .then(function(res){
+            // USE CART FUNCTION TO RETURN FLOAT 
+            setTotal(cartFunc.getCartTotal(res.data));
+        }).catch(function(err){
+            console.log("Error getting total")
+            console.log(err)
+        });
     }
+
 
     function toggleCartView() {
         setIsOpened(wasOpened => !wasOpened);

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 const CartItem = (props) => {
 
     const [quantity, setQuantity] = useState([]);
+    let formattedPrice = parseFloat(props.entry.price).toFixed(2)
 
     useEffect(() => {
         setQuantity(props.quantity);
@@ -21,7 +22,7 @@ const CartItem = (props) => {
                 <p>{props.entry.description}</p>
             </div>
             <div>
-                <h4>${props.entry.price}</h4>
+                <h4>${formattedPrice}</h4>
                 <input type="number" value={quantity} onChange={handleChange} min="1" max="5"/>
             </div>
         </div>
