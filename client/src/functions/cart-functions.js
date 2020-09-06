@@ -1,5 +1,3 @@
-import Cart from "./cart"
-
 // REFACTOR TO USE CART OBJECT
 export default {
     initCart: function () {

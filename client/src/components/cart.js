@@ -66,7 +66,7 @@ class CartClass extends Component {
     // submitCartOrder() - SUBMITS CART TO KOUNTA ON SUCCESS OF STRIPE
     submitCartOrder = function(){
         let dummyData = {
-            "status": "ON_HOLD",
+            "status": "COMPLETE",
             "notes": "Take away, gold member",
             "order_type": "Dine in",
             "guests": 23,
