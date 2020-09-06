@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 class Cart extends Component {
 
     constructor(props){
-        this.priceTotal;
+        this.priceTotal = 0.0; // PRICES SHOULD BE FLOATS
         this.state = useState([]);
         this.location = "";
         this.pickUpTime = "";
@@ -22,11 +22,21 @@ class Cart extends Component {
         }
     });
 
-    attachCartUpdateEvent = addEventListener('cartUpdated', e => console.log(e.content));
+    // attachCartUpdateEvent() - ADDS EVENT LISTENER TO ELEMENT TO WATCH FOR CART CHANGES
+    // ARGS:
+    // ELEMENT - HTML element that should listener for cart update event
+    attachCartUpdateEvent = function(element){
+        element.addEventListener('cartUpdated', e => console.log(e.content));
+    }
 
-    triggerCartUpdateEvent = addEventListener('onChange', e => (
-        e.target.dispatchEvent(this.cartUpdated)
-    ));
+    // triggerCartUpdateEvent() - ADDS TRIGGER TO ELEMENT ON ELEMENT CHANGE 
+    // ARGS:
+    // ELEMENT - HTML <INPUT> element that should TRIGGER cart update event
+    triggerCartUpdateEvent = function(element){
+        element.addEventListener('onChange', e => (
+            e.target.dispatchEvent(this.cartUpdated)
+        ))
+    };
 
     // updatedProductQuantity() - ADDS OR REMOVES 1 TO QUANTITY
     // ARGS:
