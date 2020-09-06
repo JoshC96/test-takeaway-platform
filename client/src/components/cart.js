@@ -1,11 +1,13 @@
 import React, {Component, useState} from "react";
 import PropTypes from 'prop-types';
+import LocalStorage from "../functions/cart-functions";
 
-class Cart extends Component {
+class CartClass extends Component {
 
     constructor(props){
+        super(props);
         this.priceTotal = 0.0; // PRICES SHOULD BE FLOATS
-        this.state = useState([]);
+        // this.state = useState([]);
         this.location = "";
         this.pickUpTime = "";
         this.itemsInCart = props.itemsInCart; // ARRAY FROM DEFAULT PROPS
@@ -13,30 +15,41 @@ class Cart extends Component {
     }
 
     // THIS WILL BE RUN EVERY TIME THE CART CHANGES TO UPDATE THE FINAL CART
-    cartUpdated = new CustomEvent("cartUpdated", {
-        bubbles: true,
-        content: {
-            location: "", // NEEDS TO BE SET TO COMPONENT.STATE.LOCATION
-            items: [], // NEEDS TO BE SET TO COMPONENT.STATE.ITEMS
-            pickUpTime: "" // NEEDS TO BE SET TO COMPONENT.STATE.PICKUPTIME
-        }
-    });
+    updateCart = function(){
 
-    // attachCartUpdateEvent() - ADDS EVENT LISTENER TO ELEMENT TO WATCH FOR CART CHANGES
-    // ARGS:
-    // ELEMENT - HTML element that should listener for cart update event
-    attachCartUpdateEvent = function(element){
-        element.addEventListener('cartUpdated', e => console.log(e.content));
+        // ensure single products have exact product totals
+        this.updateProductTotals(); 
+
+        // SET TEMP TOTAL
+        let newTotal = 0.0;
+
+        // LOOP THROUGH ITEMS AND ADD PRICES
+        this.itemsInCart.forEach(element => {
+            newTotal += element.totalPrice * element.quantity;
+        });
+
+        // SET PRICE
+        this.priceTotal = newTotal;
+        return this.priceTotal;
+    };
+
+
+    updateProductTotals = function(){
+        this.itemsInCart.forEach(item => {
+            item.modifiers.forEach(product => {
+                item.totalPrice += parseFloat(product.price);
+            });
+        });
     }
 
-    // triggerCartUpdateEvent() - ADDS TRIGGER TO ELEMENT ON ELEMENT CHANGE 
+    // addToCart() - ADDS A PRODUCT ITEM TO this.itemsInCart
     // ARGS:
-    // ELEMENT - HTML <INPUT> element that should TRIGGER cart update event
-    triggerCartUpdateEvent = function(element){
-        element.addEventListener('onChange', e => (
-            e.target.dispatchEvent(this.cartUpdated)
-        ))
-    };
+    // productToAdd - OBJ - product data from the product page
+    addToCart(productToAdd){
+        this.itemsInCart.push(productToAdd);
+        // RUN UPDATE CART
+        Cart.updateCart();
+    }
 
     // updatedProductQuantity() - ADDS OR REMOVES 1 TO QUANTITY
     // ARGS:
@@ -56,16 +69,16 @@ class Cart extends Component {
         
     }
 }
-Cart.propTypes = {
+
+
+CartClass.propTypes = {
     itemsInCart: PropTypes.array,
     customer: PropTypes.object
 };
 
-
-
 // IF LOCALSTORAGE CART EXISTS:
 // THESE DEFAULTS SHOULD BE SET TO THE EXISTING LOCALSTORAGE CART
-Cart.defaultProps = {
+const defaultProps = {
     itemsInCart: [{
         quantity: 1,
         totalPrice: 16.5, // PRICES ARE FLOATS
@@ -73,7 +86,7 @@ Cart.defaultProps = {
             name: "blueberries", 
             price: .50
         }],
-        data: {} // PRODUCT DATA FROM API
+        data: {} // INDIVIDUAL PRODUCT DATA FROM API
     }], 
     customer: {
         name: "John Smith",
@@ -81,5 +94,9 @@ Cart.defaultProps = {
         email: "test@test.com"
     }
 };
+
+let Cart = new CartClass(defaultProps);
+Cart.updateCart();
+
 
 export default Cart;

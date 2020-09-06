@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createRef } from 'react';
 import PropTypes from 'prop-types';
-import cartFunc from "../functions/cart-functions"
-import API from "../routes/api"
+import Cart from "./cart"
 
 import CartView from "./cart-view"
 import iconClock from "../images/icon-clock.svg"
@@ -9,24 +8,19 @@ import iconCart from "../images/icon-cart.svg"
 import iconMarker from "../images/icon-map-marker.svg"
 
 const CartSection = (props) => {
-    
-    let [cartTotal, setTotal] = useState([]);
+
+    let [cartTotal, setTotal] = useState();
     let [isOpened, setIsOpened] = useState(false);
+    let formRef = createRef();
 
     useEffect(() => {
-        setTotal(props.total);
+        setTotal(Cart.priceTotal);
         getTotal();
     }, [])
 
     const getTotal = () => { 
-        API.productsInCart(cartFunc.getCart())
-        .then(function(res){
-            // USE CART FUNCTION TO RETURN FLOAT 
-            setTotal(cartFunc.getCartTotal(res.data));
-        }).catch(function(err){
-            console.log("Error getting total")
-            console.log(err)
-        });
+        setTotal(Cart.priceTotal);
+        return Cart.priceTotal;
     }
 
 
@@ -34,10 +28,25 @@ const CartSection = (props) => {
         setIsOpened(wasOpened => !wasOpened);
     }
 
-    const handleClick = event => toggleCartView();
+    const handlePriceClick = event => toggleCartView();
+    const handleSubmit = event => {
+        event.preventDefault()
+        Cart.updateCart();
+        getTotal();
+    };
+
+    // SET CART LOCATION TO NEW LOCATION
+    const handleLocationChange = event => {
+        Cart.location = event.target.value;
+    };
+
+    // SET CART PICKUP TIME TO NEW TIME
+    const handleTimeChange = event => {
+        Cart.pickUpTime = event.target.value;
+    };
 
     return(
-        <>
+        <form className="app-cart" ref={formRef} onSubmit={handleSubmit}>
             <div className="cart-toolbar"
                 style={{bottom:"0"}}
             >
@@ -46,21 +55,38 @@ const CartSection = (props) => {
                     maxWidth: 960,
                     position: `relative`,
                 }}>
-
-                    
-                    <button style={{marginRight: `8px`}}>
+                    <div className="cart-selector" style={{marginRight: `8px`}}>
                         <img src={iconMarker} alt="Icon Map Marker" />
-                        <span>North Adelaide</span>
-                    </button>
-                    <button> 
-                        <img src={iconClock} alt="Icon Clock" /> 
-                        <span>9:45am</span>
-                    </button>
+                        {/* <span>North Adelaide</span> */}
+                        <select onChange={handleLocationChange}>
+                            <option defaultValue value="North Adelaide">North Adelaide</option>
+                            <option value="Henley Beach">Henley Beach</option>
+                            <option value="King William Road">King William Road</option>
+                            <option value="East End">East End</option>
+                        </select>
+                    </div>
+                    
 
-                    <button onClick={handleClick} style={{float: `right`}}> 
+                    <div className="cart-selector"> 
+                        <img src={iconClock} alt="Icon Clock" /> 
+                        {/* <span>9:45am</span> */}
+                        <select onChange={handleTimeChange}>
+                            <option defaultValue value="9:00">9:00am</option>
+                            <option value="10:00">10:00am</option>
+                            <option value="11:00">11:00am</option>
+                            <option value="12:00">12:00pm</option>
+                            <option value="13:00">1:00pm</option>
+                            <option value="14:00">2:00pm</option>
+                            <option value="15:00">3:00pm</option>
+                            <option value="16:00">4:00pm</option>
+                            <option value="15:00">5:00pm</option>
+                        </select>
+                    </div>
+
+                    <div className="cart-selector" onClick={handlePriceClick} style={{float: `right`}}> 
                         <img src={iconCart} alt="Icon Cart" />
                         <span>${cartTotal}</span>
-                    </button>
+                    </div>
 
                 </div>     
             </div>
@@ -68,7 +94,7 @@ const CartSection = (props) => {
             {isOpened && (
                 <CartView />
             )}
-        </>
+        </form>
     )
 }
 

@@ -1,36 +1,66 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import SEO from "../components/seo"
 import cartFunc from "../functions/cart-functions"
 import Cart from "./cart"
 
+import ExtrasList from "./extras-list"
+
 const ProductDetail = (props) => {
 
-    const handleSubmit = (e) =>{
-        e.preventDefault();
+    const handleSubmit = (event) =>{
+        event.preventDefault();
+
+        let productToAdd = {
+            quantity: 1,
+            totalPrice: 0.0, //initialized as 0
+            modifiers: [],
+            data: props.entry
+        }   
+
+        // GET PRODUCT DATA FROM THE FORM AND CREATE A PRODUCT OBJECT
+        Object.entries(event.target).map(element => {
+            if(element[1].checked)
+            {
+                productToAdd.modifiers.push({
+                    name: element[1].id,
+                    price: element[1].dataset.price
+                })
+            }
+            else if(element[1].nodeName === "SELECT")
+            {
+                let e = element[1]; // SET TEMP CURRENT SELECT ELEMENT
+                productToAdd.modifiers.push({
+                    name: e.value,
+                    price: e.options[e.selectedIndex].dataset.price
+                })
+            } 
+        });
+
+        // ADD PRODUCT ITEM TO Cart.itemsInCart
+        Cart.addToCart(productToAdd);
         cartFunc.addToCart(props.entry.id);
     }
 
-    let addonsArray = typeof props.entry.addOns === "undefined" ? [] : props.entry.addOns;
+    // VARIATIONS ARRAY - THINGS LIKE SMALL/REGULAR/LARGE SIZES
+    let variationArray = typeof props.entry.addOns === "undefined" ? [] : props.entry.addOns;
 
-    const addonList = addonsArray.map((productAddOnsObj) => {
+    const variationsList = variationArray.map((productVariationObj,index) => {
         return (
-            <div className="product-addon">
-                <p>{productAddOnsObj.addOnName}</p>
-                {Object.entries(productAddOnsObj.variations).map(([key,value])=>{
-                    return(
-                        <>
-                            <label htmlFor={key}>
+            <div className="product-addon" key={index}>
+                <label htmlFor={"product-list-"+index}>{productVariationObj.addOnName}</label>
+                <select id={"product-list-"+index} className="product-variation-select">
+                    {Object.entries(productVariationObj.variations).map(([key,value],objIndex)=>{
+                        return(
+                            <option value={value.variationName} data-price={value.variationPrice} key={objIndex}>
                                 {value.variationName} : ${value.variationPrice}
-                                <input type="checkbox" id={key} />
-                            </label>
-                        </>
-                    )
-                })}
+                            </option>
+                        )
+                    })}
+                </select>
             </div>
         );
-    })
-    
-    
+    })  
+
     
 
     return(
@@ -47,11 +77,22 @@ const ProductDetail = (props) => {
 
             <form onSubmit={handleSubmit}>
 
-                <h4>Add ons</h4>
-                {addonList}
+                {variationsList.length ? (
+                    <>
+                        <h3>Options</h3>
+                        {variationsList}
+                    </>
+                    ) : (
+                    <>
+                        {/* ERROR LOG HERE */}
+                    </>
+                )}
 
+            
+                <ExtrasList />
+            
 
-                <input type="submit" value="Add to cart" />
+                <button type="submit">Add to cart</button>
             </form>
         </>
     )

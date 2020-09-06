@@ -285,7 +285,7 @@ footer{
     bottom: -104px;
     z-index: 9;
 
-    button{
+    .cart-selector{
         background: none;
         border: 3px solid #FFFFFF;
         box-sizing: border-box;
@@ -338,4 +338,13 @@ footer{
         }
     }
 
+}
+
+
+.product-extras-list{
+    column-count: 3;
+
+    label{
+        display: block;
+    }
 }

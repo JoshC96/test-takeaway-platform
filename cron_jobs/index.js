@@ -24,5 +24,14 @@ cron.schedule("* * * * *", function() {
             console.log('Saved categories');
         });
       });
+
+    axiosInstance
+      .get('/api/extras.json')
+      .then(function (response) {
+        fs.writeFile('./client/shop_data/allExtras.txt', JSON.stringify(response.data), function (err) {
+            if (err) throw err;
+            console.log('Saved Extras');
+        });
+      });
     
 });

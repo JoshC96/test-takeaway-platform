@@ -267,7 +267,7 @@ footer .footer .main-footer-icon {
   bottom: -104px;
   z-index: 9;
 }
-.cart-toolbar button {
+.cart-toolbar .cart-selector {
   background: none;
   border: 3px solid #FFFFFF;
   box-sizing: border-box;
@@ -277,7 +277,7 @@ footer .footer .main-footer-icon {
   display: inline-block;
   position: relative;
 }
-.cart-toolbar button img {
+.cart-toolbar .cart-selector img {
   margin: 0;
   margin-right: 8px;
   max-height: 25px;
@@ -285,7 +285,7 @@ footer .footer .main-footer-icon {
   position: absolute;
   left: 9px;
 }
-.cart-toolbar button span {
+.cart-toolbar .cart-selector span {
   color: #fff;
 }
 
@@ -313,6 +313,13 @@ footer .footer .main-footer-icon {
 }
 .cart-view .cart-item p {
   font-size: 14px;
+}
+
+.product-extras-list {
+  column-count: 3;
+}
+.product-extras-list label {
+  display: block;
 }
 
 /*# sourceMappingURL=app.css.map */

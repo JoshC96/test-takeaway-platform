@@ -17,6 +17,9 @@ export default {
   allCategories: function() {
     return axios.get('/api/categories')
   },
+  allExtras: function() {
+    return axios.get('/api/extras')
+  },
   getStripeSecret: function(amountToCharge) {
     return axios.get('/stripe/secret?amount='+amountToCharge)
   }
