@@ -22,5 +22,10 @@ export default {
   },
   getStripeSecret: function(amountToCharge) {
     return axios.get('/stripe/secret?amount='+amountToCharge)
+  },
+  sendKountaOrder: function(orderObj) {
+    return axios.post('/kounta/newOrder',{
+      data: orderObj
+    })
   }
 };

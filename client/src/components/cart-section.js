@@ -23,7 +23,6 @@ const CartSection = (props) => {
         return Cart.priceTotal;
     }
 
-
     function toggleCartView() {
         setIsOpened(wasOpened => !wasOpened);
     }

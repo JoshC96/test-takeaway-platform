@@ -5,6 +5,7 @@ import React from 'react';
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import API from "../routes/api"
+import Cart from "./cart"
 
 import { useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
@@ -64,7 +65,9 @@ const CheckoutForm = () => {
       // a zero-decimal currency). The minimum amount is $0.50 US or equivalent 
       // in charge currency. The amount value supports up to eight digits 
       // (e.g., a value of 99999999 for a USD charge of $999,999.99).
-      const amountToCharge = 1550;
+
+      //TODO: AMOUNT SHOULD BE VALIDATED
+      const amountToCharge = Cart.priceTotal.toString().replace('.','');
 
       let secret = null; 
       await API.getStripeSecret(amountToCharge)

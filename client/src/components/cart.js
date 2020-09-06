@@ -1,6 +1,5 @@
 import React, {Component, useState} from "react";
 import PropTypes from 'prop-types';
-import LocalStorage from "../functions/cart-functions";
 
 class CartClass extends Component {
 
@@ -64,7 +63,7 @@ class CartClass extends Component {
         }
     }
 
-    // submitCartOrder() - SUBMITS THE CART TO STRIPE, ON SUCCESS SUBMITS IT TO KOUNTA
+    // submitCartOrder() - SUBMITS CART TO KOUNTA ON SUCCESS OF STRIPE
     submitCartOrder = function(){
         
     }

@@ -1,5 +1,6 @@
-import API from "../routes/api"
+import Cart from "./cart"
 
+// REFACTOR TO USE CART OBJECT
 export default {
     initCart: function () {
         if(localStorage.getItem("userCart") === null){
