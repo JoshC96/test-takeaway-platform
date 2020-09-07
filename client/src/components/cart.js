@@ -127,7 +127,18 @@ const defaultProps = {
             name: "blueberries", 
             price: .50
         }],
-        data: {} // INDIVIDUAL PRODUCT DATA FROM API
+        data: {
+            "id": 37,
+            "uri": "product/37",
+            "title": "Health Nut",
+            "price": "15.5",
+            "category": {
+                "id": "24",
+                "title": "Acai Bowls"
+            },
+            "description": "Delicia Acai blend topped with granola, coconut flakes, banana, honey, strawberries, mixed nuts, goji berries, chia seeds, nut butter",
+            "imageUrl": "http://takeaway.nightfallstudios.com.au/assets/_440x320_crop_center-center_50_none/basic-acai-bowl.jpg"
+        } // INDIVIDUAL PRODUCT DATA FROM API
     }], 
     customer: {
         name: "John Smith",

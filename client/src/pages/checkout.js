@@ -1,11 +1,12 @@
 // MODULES
 import React from 'react';
+import API from "../routes/api"
+import Cart from "./cart"
 
 // COMPONENTS
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import API from "../routes/api"
-import Cart from "./cart"
+import CheckoutProducts from "../components/checkout-products"
 
 import { useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
@@ -120,6 +121,15 @@ const CheckoutForm = () => {
                 </label>
                 <input id="customer-number" text="number" name="customer-number" />
             </div>
+            <div className="form-row">
+                <label htmlFor="customer-number">
+                  Email Address
+                </label>
+                <input id="customer-email" text="emial" name="customer-email" />
+            </div>
+
+            <CheckoutProducts />
+
             <div className="form-row">
                 <label htmlFor="card-element">
                     Credit or debit card

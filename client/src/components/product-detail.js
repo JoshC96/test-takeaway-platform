@@ -5,16 +5,25 @@ import Cart from "./cart"
 
 import ExtrasList from "./extras-list"
 
-const ProductDetail = (props) => {
+class ProductDetail extends React.Component{
 
-    const handleSubmit = (event) =>{
+    constructor(props){
+        super(props)
+        this.props = props;
+    }
+
+    state = {
+        buttonText: 'Add to Cart'
+    }
+
+    handleSubmit = (event) =>{
         event.preventDefault();
 
         let productToAdd = {
             quantity: 1,
             totalPrice: 0.0, //initialized as 0
             modifiers: [],
-            data: props.entry
+            data: this.props.entry
         }   
 
         // GET PRODUCT DATA FROM THE FORM AND CREATE A PRODUCT OBJECT
@@ -38,13 +47,19 @@ const ProductDetail = (props) => {
 
         // ADD PRODUCT ITEM TO Cart.itemsInCart
         Cart.addToCart(productToAdd);
-        cartFunc.addToCart(props.entry.id);
+        cartFunc.addToCart(this.props.entry.id);
+    }
+
+    buttonClick = () => {
+        this.setState({
+            buttonText: 'Added!'
+        });
     }
 
     // VARIATIONS ARRAY - THINGS LIKE SMALL/REGULAR/LARGE SIZES
-    let variationArray = typeof props.entry.addOns === "undefined" ? [] : props.entry.addOns;
+    variationArray = typeof this.props.entry.addOns === "undefined" ? [] : this.props.entry.addOns;
 
-    const variationsList = variationArray.map((productVariationObj,index) => {
+    variationsList = this.variationArray.map((productVariationObj,index) => {
         return (
             <div className="product-addon" key={index}>
                 <label htmlFor={"product-list-"+index}>{productVariationObj.addOnName}</label>
@@ -62,40 +77,41 @@ const ProductDetail = (props) => {
     })  
 
     
+    render() {
+        return (
+            <>
+                <SEO title={this.props.entry.title} />
 
-    return(
-        <>
-            <SEO title={props.entry.title} />
-
-            <h1>{props.entry.title}</h1>
-            <h3>${props.entry.price}</h3>
+                <h1>{this.props.entry.title}</h1>
+                <h3>${this.props.entry.price}</h3>
 
 
-            <img src={props.entry.imageUrl} alt={props.entry.title} />
+                <img src={this.props.entry.imageUrl} alt={this.props.entry.title} />
 
-            <p>{props.entry.description}</p>
+                <p>{this.props.entry.description}</p>
 
-            <form onSubmit={handleSubmit}>
+                <form onSubmit={this.handleSubmit}>
 
-                {variationsList.length ? (
-                    <>
-                        <h3>Options</h3>
-                        {variationsList}
-                    </>
-                    ) : (
-                    <>
-                        {/* ERROR LOG HERE */}
-                    </>
-                )}
+                    {this.variationsList.length ? (
+                        <>
+                            <h3>Options</h3>
+                            {this.variationsList}
+                        </>
+                        ) : (
+                        <>
+                            {/* ERROR LOG HERE */}
+                        </>
+                    )}
 
-            
-                <ExtrasList />
-            
+                
+                    <ExtrasList />
+                
 
-                <button type="submit">Add to cart</button>
-            </form>
-        </>
-    )
+                    <button type="submit" onClick={this.buttonClick}>{this.state.buttonText}</button>
+                </form>
+            </>
+        )
+    }
 }
   
 export default ProductDetail
