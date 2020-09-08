@@ -2,6 +2,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import CartFunc from "./functions/cart-functions.js"
+import CartController from "./components/cart"
 
 // PAGES
 import HomePage from "./pages/home"

@@ -21,6 +21,7 @@ img {
 }
 
 .main-header {
+  position: relative;
   margin-bottom: 1.45rem;
   background: #fff;
 }
@@ -28,6 +29,12 @@ img {
   max-height: 100px;
   display: block;
   margin: 0 auto;
+}
+.main-header .states-list {
+  position: absolute;
+  right: 25px;
+  top: 50%;
+  transform: translate(0, -50%);
 }
 
 .hero-standard {

@@ -1,34 +1,50 @@
-import React, {Component, useState} from "react";
+import React, {Component, setState} from "react";
 import PropTypes from 'prop-types';
+import Storage from '../functions/cart-functions';
 
 class CartClass extends Component {
 
     constructor(props){
         super(props);
         this.priceTotal = 0.0; // PRICES SHOULD BE FLOATS
-        // this.state = useState([]);
         this.location = "";
+        this.stateLocation = "South Australia"; // DEFAULT STATE LOCATION
         this.pickUpTime = "";
         this.itemsInCart = props.itemsInCart; // ARRAY FROM DEFAULT PROPS
         this.customer = props.customer; // OBJECT FROM DEFAULT PROPS
+
+        this.state = {
+            priceTotal: this.priceTotal,
+            location: this.location,
+            stateLocation: this.stateLocation,
+            pickUpTime: this.pickUpTime,
+            itemsInCart: this.itemsInCart,
+            customer: this.customer
+        }
+
+        this.loadCart();
     }
+
 
     // THIS WILL BE RUN EVERY TIME THE CART CHANGES TO UPDATE THE FINAL CART
     updateCart = function(){
 
         // ensure single products have exact product totals
-        this.updateProductTotals(); 
+        // this.updateProductTotals(); 
 
         // SET TEMP TOTAL
         let newTotal = 0.0;
 
         // LOOP THROUGH ITEMS AND ADD PRICES
         this.itemsInCart.forEach(element => {
-            newTotal += element.totalPrice * element.quantity;
+            newTotal +=  parseFloat(element.totalPrice) * parseFloat(element.quantity);
         });
 
         // SET PRICE
         this.priceTotal = newTotal;
+
+        this.saveCart();
+
         return this.priceTotal;
     };
 
@@ -43,12 +59,62 @@ class CartClass extends Component {
 
     // addToCart() - ADDS A PRODUCT ITEM TO this.itemsInCart
     // ARGS:
-    // productToAdd - OBJ - product data from the product page
-    addToCart(productToAdd){
-        this.itemsInCart.push(productToAdd);
+    // quantity - INT - number of items that should be EXACTLY this item
+    // productData - OBJ - product data from Craft API
+    // modifiers - ARRAY - add ons or extra related to the product
+    addToCart(quantity, productData, modifiers){
+        let newProduct = this.createCartItem(quantity, productData, modifiers)
+        this.itemsInCart.push(newProduct);
         // RUN UPDATE CART
         Cart.updateCart();
     }
+
+    // removeFromCart() - REMOVES A PRODUCT FROM this.itemsInCart
+    // ARGS:
+    // itemToRemove - INT - cart item ID
+    removeFromCart(itemToRemove){
+
+        console.log(this.itemsInCart)
+        console.log(itemToRemove)
+        
+        this.itemsInCart = this.itemsInCart.filter(product => product.id !== itemToRemove)
+
+        // RUN UPDATE CART
+        Cart.updateCart();
+    }
+
+    // createCartItem() - CREATES A CART ITEM TO STORE IN this.itemsInCart
+    // ARGS:
+    // quantity - INT - number of items that should be EXACTLY this item
+    // productData - OBJ - product data from Craft API
+    // modifiers - ARRAY - add ons or extra related to the product
+    createCartItem(quantity, productData, modifiers){
+
+        let productToAdd = {
+            id: this.itemsInCart.length + 1,
+            quantity: quantity ? quantity : 1,
+            totalPrice: 0.0,
+            modifiers: modifiers ? modifiers : [],
+            data: productData
+        } 
+
+        let modifiersTotal = 0;
+
+        // ADD ALL MODIFIERS PRICES
+        productToAdd.modifiers.forEach(element => {
+            modifiersTotal = parseFloat(modifiersTotal) + parseFloat(element.price);
+        });
+
+        // CALCULATE TOTAL PRICE OF ITEM
+        productToAdd.totalPrice = (parseFloat(productToAdd.data.price) + parseFloat(modifiersTotal)) * parseFloat(productToAdd.quantity);
+
+        // PARSE TO FLOAT
+        productToAdd.totalPrice = parseFloat(productToAdd.totalPrice).toFixed(2)
+
+        return productToAdd;
+
+    }
+
 
     // updatedProductQuantity() - ADDS OR REMOVES 1 TO QUANTITY
     // ARGS:
@@ -60,6 +126,35 @@ class CartClass extends Component {
         }
         else if(productInCart.quantity !== 1){
             productInCart.quantity -= 1;
+        }
+    }
+
+    // saveCart() - SAVES THE CART TO LOCAL STORAGE
+    saveCart = function(){
+        let savedCartObject = {
+            priceTotal:this.priceTotal,
+            location: this.location,
+            stateLocation: this.stateLocation,
+            pickUpTime: this.pickUpTime,
+            itemsInCart: this.itemsInCart,
+            customer: this.customer
+        };
+        Storage.saveCart(savedCartObject)
+    }
+
+    // loadCart() - LOADS THE CART FROM LOCAL STORAGE IF EXISTS
+    loadCart = function(){
+        if(Storage.getCart() === null){
+            Storage.initCart()
+        }
+        else{
+            let savedCart = JSON.parse(Storage.getCart())
+            this.priceTotal = savedCart.priceTotal;
+            this.location = savedCart.location;
+            this.stateLocation = savedCart.stateLocation;
+            this.pickUpTime = savedCart.pickUpTime;
+            this.itemsInCart = savedCart.itemsInCart;
+            this.customer = savedCart.customer;
         }
     }
 
@@ -120,26 +215,7 @@ CartClass.propTypes = {
 // IF LOCALSTORAGE CART EXISTS:
 // THESE DEFAULTS SHOULD BE SET TO THE EXISTING LOCALSTORAGE CART
 const defaultProps = {
-    itemsInCart: [{
-        quantity: 1,
-        totalPrice: 16.5, // PRICES ARE FLOATS
-        modifiers: [{ // ARRAY OF PRODUCT ADD ONS
-            name: "blueberries", 
-            price: .50
-        }],
-        data: {
-            "id": 37,
-            "uri": "product/37",
-            "title": "Health Nut",
-            "price": "15.5",
-            "category": {
-                "id": "24",
-                "title": "Acai Bowls"
-            },
-            "description": "Delicia Acai blend topped with granola, coconut flakes, banana, honey, strawberries, mixed nuts, goji berries, chia seeds, nut butter",
-            "imageUrl": "http://takeaway.nightfallstudios.com.au/assets/_440x320_crop_center-center_50_none/basic-acai-bowl.jpg"
-        } // INDIVIDUAL PRODUCT DATA FROM API
-    }], 
+    itemsInCart: [], 
     customer: {
         name: "John Smith",
         phone: "+614 1324 5798",

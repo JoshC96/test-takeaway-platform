@@ -21,6 +21,7 @@ img{
 }
 
 .main-header{
+    position: relative;
     margin-bottom: 1.45rem;
     background: #fff;
     .main-header-logo{
@@ -28,6 +29,14 @@ img{
         display: block;
         margin: 0 auto;
     }
+    
+    .states-list{
+        position: absolute;
+        right: 25px;
+        top: 50%;
+        transform: translate(0,-50%);
+    }
+
 }
 
 .hero-standard{
@@ -339,7 +348,6 @@ footer{
     }
 
 }
-
 
 .product-extras-list{
     column-count: 3;

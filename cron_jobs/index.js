@@ -33,5 +33,14 @@ cron.schedule("* * * * *", function() {
             console.log('Saved Extras');
         });
       });
+      
+    axiosInstance
+      .get('/api/stores.json')
+      .then(function (response) {
+        fs.writeFile('./client/shop_data/allStores.txt', JSON.stringify(response.data), function (err) {
+            if (err) throw err;
+            console.log('Saved Stores');
+        });
+      });
     
 });

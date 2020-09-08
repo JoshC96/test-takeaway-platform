@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Cart from "./cart"
 
 import CartView from "./cart-view"
+import StoreList from "./store-list"
 import iconClock from "../images/icon-clock.svg"
 import iconCart from "../images/icon-cart.svg"
 import iconMarker from "../images/icon-map-marker.svg"
@@ -20,7 +21,6 @@ const CartSection = (props) => {
 
     const getTotal = () => { 
         setTotal(Cart.priceTotal);
-        return Cart.priceTotal;
     }
 
     function toggleCartView() {
@@ -32,11 +32,6 @@ const CartSection = (props) => {
         event.preventDefault()
         Cart.updateCart();
         getTotal();
-    };
-
-    // SET CART LOCATION TO NEW LOCATION
-    const handleLocationChange = event => {
-        Cart.location = event.target.value;
     };
 
     // SET CART PICKUP TIME TO NEW TIME
@@ -56,13 +51,7 @@ const CartSection = (props) => {
                 }}>
                     <div className="cart-selector" style={{marginRight: `8px`}}>
                         <img src={iconMarker} alt="Icon Map Marker" />
-                        {/* <span>North Adelaide</span> */}
-                        <select onChange={handleLocationChange}>
-                            <option defaultValue value="North Adelaide">North Adelaide</option>
-                            <option value="Henley Beach">Henley Beach</option>
-                            <option value="King William Road">King William Road</option>
-                            <option value="East End">East End</option>
-                        </select>
+                        <StoreList />
                     </div>
                     
 

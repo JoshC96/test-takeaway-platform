@@ -3,6 +3,7 @@ import CartFunc from "../functions/cart-functions"
 import API from "../routes/api";
 
 import CartItem from "./cart-item";
+import Cart from './cart';
 
 const CartView = (props) => {
 
@@ -13,9 +14,7 @@ const CartView = (props) => {
     }, [])
   
     const getCartProducts = () => {
-      API.productsInCart(CartFunc.getCart())
-        .then(res => setCartItems(res.data))
-        .catch(err => console.log(err));
+        setCartItems(Cart.itemsInCart)
     };
 
     return(
@@ -29,11 +28,11 @@ const CartView = (props) => {
 
                 {cartItems.length ? (
                     <>
-                    {cartItems.map((entry, index) => {
+                    {cartItems.map((item, index) => {
                         return (
                         <CartItem
                             key={index}
-                            entry={entry}
+                            item={item}
                         />
                         )
                     })}

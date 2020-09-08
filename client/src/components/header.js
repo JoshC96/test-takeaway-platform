@@ -1,5 +1,6 @@
 import React from "react"
 import headerImage from '../images/Delicia-Logo.png'
+import StateList from "./state-list"
 
 const Header = () => (
   <header
@@ -12,20 +13,11 @@ const Header = () => (
         padding: `1.45rem 1.0875rem`,
       }}
     >
-
-      <h1 style={{ margin: 0 }}>
-        <a
-          href="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
+        <a href="/" style={{color: `white`, textDecoration: `none`,}}>
           <img src={headerImage} alt="Delicia Logo" className="main-header-logo"/>
-
         </a>
-      </h1>
     </div>
+    <StateList />
   </header>
 )
 

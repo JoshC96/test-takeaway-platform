@@ -10,27 +10,24 @@ class ProductDetail extends React.Component{
     constructor(props){
         super(props)
         this.props = props;
+
+        this.state = {
+            buttonText: 'Add to Cart'
+        }
     }
 
-    state = {
-        buttonText: 'Add to Cart'
-    }
+    
 
     handleSubmit = (event) =>{
         event.preventDefault();
 
-        let productToAdd = {
-            quantity: 1,
-            totalPrice: 0.0, //initialized as 0
-            modifiers: [],
-            data: this.props.entry
-        }   
+        let modifiers = []; 
 
         // GET PRODUCT DATA FROM THE FORM AND CREATE A PRODUCT OBJECT
         Object.entries(event.target).map(element => {
             if(element[1].checked)
             {
-                productToAdd.modifiers.push({
+                modifiers.push({
                     name: element[1].id,
                     price: element[1].dataset.price
                 })
@@ -38,16 +35,15 @@ class ProductDetail extends React.Component{
             else if(element[1].nodeName === "SELECT")
             {
                 let e = element[1]; // SET TEMP CURRENT SELECT ELEMENT
-                productToAdd.modifiers.push({
+                modifiers.push({
                     name: e.value,
                     price: e.options[e.selectedIndex].dataset.price
                 })
             } 
         });
 
-        // ADD PRODUCT ITEM TO Cart.itemsInCart
-        Cart.addToCart(productToAdd);
-        cartFunc.addToCart(this.props.entry.id);
+        // ARGS ARE QUANTITY - ENTRY DATA - MODIFIERS
+        Cart.addToCart(1, this.props.entry, modifiers);        
     }
 
     buttonClick = () => {
@@ -66,8 +62,8 @@ class ProductDetail extends React.Component{
                 <select id={"product-list-"+index} className="product-variation-select">
                     {Object.entries(productVariationObj.variations).map(([key,value],objIndex)=>{
                         return(
-                            <option value={value.variationName} data-price={value.variationPrice} key={objIndex}>
-                                {value.variationName} : ${value.variationPrice}
+                            <option value={value.variationName} data-price={value.variationPrice? value.variationPrice : 0.00} key={objIndex}>
+                                {value.variationName} : ${value.variationPrice ? value.variationPrice : 0.00}
                             </option>
                         )
                     })}

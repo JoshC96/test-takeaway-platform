@@ -3,6 +3,7 @@ import React from "react"
 import iconPlus from '../images/icon-plus.svg';
 import hero from '../images/main-hero.jpg';
 import cartFunc from "../functions/cart-functions"
+import Cart from "./cart"
 
 const ProductItem = (key) => {
 
@@ -13,7 +14,12 @@ const ProductItem = (key) => {
   let imageUrl = key.props.imageUrl !== "" ? key.props.imageUrl : hero;
 
   const addToCart = () =>{
-    cartFunc.addToCart(key.props.id);
+    Cart.addToCart({
+      quantity: 1,
+      totalPrice: key.props.price,
+      modifiers: [],
+      data: key.props
+    })
   }
 
   return(
