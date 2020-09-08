@@ -1,7 +1,7 @@
 // MODULES
 import React from 'react';
 import API from "../routes/api"
-import Cart from "./cart"
+import Cart from "../components/cart"
 
 // COMPONENTS
 import Layout from "../components/layout"
@@ -97,8 +97,9 @@ const CheckoutForm = () => {
         } else {
             setError(null);
             if (result.paymentIntent.status === 'succeeded') {
-              console.log(result);
-              alert("successful payment")
+              window.location.href = "/order-confirmed";
+              // console.log(result);
+              // alert("successful payment")
             }
         }
       }

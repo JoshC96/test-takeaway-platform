@@ -30,7 +30,7 @@ const CartView = (props) => {
                 position: `relative`,
             }}>
 
-                <img style={{maxHeight: `30px`}} src={closeView} alt="Close Cart" onClick={handleClose} />
+                <img style={{maxHeight: `40px`}} src={closeView} alt="Close Cart" onClick={handleClose} />
 
                 <h3>Cart Items</h3>
 

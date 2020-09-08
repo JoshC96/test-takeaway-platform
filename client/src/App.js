@@ -11,6 +11,7 @@ import Category from "./pages/category"
 import Product from "./pages/product"
 import Cart from "./pages/cart"
 import Checkout from "./pages/checkout"
+import OrderConfirmed from "./pages/order-confirmed"
 
 
 function App() {
@@ -35,6 +36,9 @@ function App() {
           </Route>
           <Route exact path="/checkout">
             <Checkout />
+          </Route>
+          <Route exact path="/order-confirmed">
+            <OrderConfirmed />
           </Route>
           <Route>
             <NotFound />

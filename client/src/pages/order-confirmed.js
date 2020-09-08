@@ -12,7 +12,7 @@ function OrderConfirmed() {
             <div style={{display:"flex", justifyContent:"center", alignItems:"center"}}>
                 <h1>Order Confirmed - Thank you! </h1>
                 Thank you for your purchase, your receipt is below:
-                <Receipt />
+                {/* <Receipt /> */}
             </div>
         </Layout>
     )
