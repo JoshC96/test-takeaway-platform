@@ -36,18 +36,14 @@ module.exports = {
       return res.json(result);
     });
   },
-  productsInCart: function(req, res) {
+  productsByStore: function(req, res) {
     fs.readFile('./client/shop_data/allProducts.txt', function read(err, data) {
       if (err) {
           throw err;
       }
-      let cart = req.query.cart.split(',');
       let result = JSON.parse(data).filter(product => {
-        for (let i = 0; i < cart.length; i++) {
-          const element = cart[i];
-          if(product.id === parseInt(element)){
-            return product;
-          }
+        if(product.storeId === req.query.storeId){
+          return product;
         }
       });
       return res.json(result);

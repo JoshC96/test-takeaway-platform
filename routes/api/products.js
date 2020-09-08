@@ -16,9 +16,9 @@ router
     .route("/category")
     .get(productsController.productsByCategory);
 
-// Matches with "/api/products/cart"
+// Matches with "/api/products/store"
 router
-    .route("/cart")
-    .get(productsController.productsInCart);
+    .route("/store")
+    .get(productsController.productsByStore);
 
 module.exports = router;

@@ -10,6 +10,9 @@ export default {
   productsByCategory: function(id) {
     return axios.get('/api/products/category?id='+id)
   },
+  productsByStore: function(id) {
+    return axios.get('/api/products/store?storeId='+id)
+  },
   allCategories: function() {
     return axios.get('/api/categories')
   },

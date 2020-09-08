@@ -15,9 +15,6 @@ import OrderConfirmed from "./pages/order-confirmed"
 
 
 function App() {
-  // INITIALIZE CART ON APP LOAD
-  CartFunc.initCart();
-
   return (
     <Router>
       <div>
