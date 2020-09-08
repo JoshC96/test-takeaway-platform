@@ -5,52 +5,66 @@ import hero from '../images/main-hero.jpg';
 import cartFunc from "../functions/cart-functions"
 import Cart from "./cart"
 
-const ProductItem = (key) => {
+class ProductItem extends React.Component{
 
-  // PREPEND SLASH TO AVOID RELATIVE LINKS AND URI 
-  // THAT LOOKS LIKE '/categories/acai-bowls/products/summer-dreaming/'
-  const productLink = "/" + key.props.uri;
+    constructor(props){
+        super(props)
+        this.productLink = "/" + props.item.uri // PREPEND SLASH TO AVOID RELATIVE LINKS AND URI 
+        this.imageUrl = props.item.imageUrl !== "" ? props.item.imageUrl : hero;
+        this.title = props.item.title;
+        this.description = props.item.description;
+        this.price = props.item.price;
+        this.item = props.item;
 
-  let imageUrl = key.props.imageUrl !== "" ? key.props.imageUrl : hero;
+        this.state = {
+            buttonText: 'Add to Cart'
+        }
+    }
 
-  const addToCart = () =>{
-    Cart.addToCart({
-      quantity: 1,
-      totalPrice: key.props.price,
-      modifiers: [],
-      data: key.props
-    })
-  }
+    addToCart = (event) =>{
+      event.preventDefault();
 
-  return(
-    <div className="grid-item-wrap">
-      <div className="product-item">
-        <div className="grid-item-image">
-          <a href={productLink} className="thumb-link" aria-label={key.props.title}></a>
-          <img src={imageUrl} alt={key.props.title} />
-        </div>
-        <div className="product-details">
-          <h3>
-            {key.props.title}
-          </h3>
-          <p>
-            {key.props.description}
-          </p>
+      this.setState({
+          buttonText: 'Added!'
+      });
+      
+      // ARGS ARE QUANTITY - ENTRY DATA - MODIFIERS
+      Cart.addToCart(1, this.item, []);
+    }
 
-          <div className="product-price">
-            <span>
-              ${key.props.price}
-            </span>
-            <button className="cart-add" onClick={addToCart}>
-              <img src={iconPlus} alt="Add to cart" />
-            </button>
-
+    render(){
+      return(
+        <div className="grid-item-wrap">
+          <div className="product-item">
+            <div className="grid-item-image">
+              <a href={this.productLink} className="thumb-link" aria-label={this.title}></a>
+              <img src={this.imageUrl} alt={this.title} />
+            </div>
+            <div className="product-details">
+              <h3>
+                {this.title}
+              </h3>
+              <p>
+                {this.description}
+              </p>
+    
+              <div className="product-price">
+                <span>
+                  ${this.price}
+                </span>
+                <button className="cart-add" onClick={this.addToCart}>
+                  {this.state.buttonText}
+                  {/* <img src={iconPlus} alt="Add to cart" /> */}
+                </button>
+    
+              </div>
+            </div>
+    
           </div>
         </div>
-
-      </div>
-    </div>
-  )
+      )
+    }
+  
 }
 
 

@@ -23,7 +23,7 @@ class CheckoutProducts extends React.Component{
     render() {
         return (
             <>
-
+                <h3>Cart</h3>
                 {this.productsList.length ? (
                     <>
                         {this.productsList}

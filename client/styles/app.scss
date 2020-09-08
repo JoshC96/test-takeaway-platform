@@ -237,6 +237,8 @@ footer{
 
 // CHECKOUT STYLES
 .StripeElement {
+    width: 100%;
+    display: block;
     box-sizing: border-box;
     height: 40px;
     padding: 10px 12px;
@@ -283,6 +285,17 @@ footer{
     float: left;
     margin-left: 12px;
     margin-top: 28px;
+}
+
+.checkout-item{
+    border: 2px solid rgba(0, 0, 0, .08);
+    padding: 15px;
+}
+
+.checkout-button{
+    display: inline-block;
+    background: #007bff;
+    padding: 8px 16px;
 }
 
 
@@ -336,17 +349,17 @@ footer{
         color:#fff;
     }
 
-    .cart-item{
-        display: flex;
-        justify-content: space-between;
-        border-bottom: 1px solid white;
-        margin-bottom: 1rem;
+}
 
-        p{
-            font-size:14px;
-        }
+.cart-item{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid white;
+    margin-bottom: 1rem;
+
+    p{
+        font-size:14px;
     }
-
 }
 
 .product-extras-list{
@@ -356,3 +369,4 @@ footer{
         display: block;
     }
 }
+

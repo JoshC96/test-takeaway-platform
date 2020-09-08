@@ -1,6 +1,7 @@
 import React, {Component, setState} from "react";
 import PropTypes from 'prop-types';
 import Storage from '../functions/cart-functions';
+import CartSection from "./cart-section"
 
 class CartClass extends Component {
 
@@ -8,7 +9,7 @@ class CartClass extends Component {
         super(props);
         this.priceTotal = 0.0; // PRICES SHOULD BE FLOATS
         this.location = "";
-        this.stateLocation = "South Australia"; // DEFAULT STATE LOCATION
+        this.stateLocation = ""; // DEFAULT STATE LOCATION
         this.pickUpTime = "";
         this.itemsInCart = props.itemsInCart; // ARRAY FROM DEFAULT PROPS
         this.customer = props.customer; // OBJECT FROM DEFAULT PROPS
@@ -29,16 +30,18 @@ class CartClass extends Component {
     // THIS WILL BE RUN EVERY TIME THE CART CHANGES TO UPDATE THE FINAL CART
     updateCart = function(){
 
-        // ensure single products have exact product totals
-        // this.updateProductTotals(); 
+        // UPDATE THE CART TOOLBAR PRICE
+        
 
         // SET TEMP TOTAL
         let newTotal = 0.0;
 
         // LOOP THROUGH ITEMS AND ADD PRICES
-        this.itemsInCart.forEach(element => {
-            newTotal +=  parseFloat(element.totalPrice) * parseFloat(element.quantity);
-        });
+        if(typeof this.itemsInCart !== "undefined"){
+            this.itemsInCart.forEach(element => {
+                newTotal +=  parseFloat(element.totalPrice) * parseFloat(element.quantity);
+            });
+        }
 
         // SET PRICE
         this.priceTotal = newTotal;
@@ -72,11 +75,7 @@ class CartClass extends Component {
     // removeFromCart() - REMOVES A PRODUCT FROM this.itemsInCart
     // ARGS:
     // itemToRemove - INT - cart item ID
-    removeFromCart(itemToRemove){
-
-        console.log(this.itemsInCart)
-        console.log(itemToRemove)
-        
+    removeFromCart(itemToRemove){        
         this.itemsInCart = this.itemsInCart.filter(product => product.id !== itemToRemove)
 
         // RUN UPDATE CART
@@ -160,49 +159,7 @@ class CartClass extends Component {
 
     // submitCartOrder() - SUBMITS CART TO KOUNTA ON SUCCESS OF STRIPE
     submitCartOrder = function(){
-        let dummyData = {
-            "status": "COMPLETE",
-            "notes": "Take away, gold member",
-            "order_type": "Dine in",
-            "guests": 23,
-            "customer_id": 3842,
-            "site_id": 409,
-            "lines": [
-              {
-                "product_id": 730297,
-                "quantity": 6,
-                "notes": "Extra hot",
-                "unit_price": 1.3636
-              },
-              {
-                "product_id": 5312,
-                "quantity": 1,
-                "price_variation": 0.9,
-                "modifiers": [
-                  228,
-                  228,
-                  -3091
-                ]
-              }
-            ],
-            "price_limit": 100,
-            "price_variation": 1.15,
-            "payments": [
-              {
-                "method_id": 1,
-                "amount": 5.5,
-                "ref": "9000768"
-              }
-            ],
-            "callback_uri": "http://third-party.com/update_order_status.json?id=123582936748",
-            "complete_when_paid": false,
-            "pass_thru_printing": false,
-            "lock": [
-              "PAYMENTS"
-            ],
-            "placed_at": "2013-05-29T11:14:06+10:00",
-            "fulfil_at": "2013-05-29T13:00:00+10:00"
-          }
+        
     }
 }
 

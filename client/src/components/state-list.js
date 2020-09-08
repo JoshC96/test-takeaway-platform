@@ -13,9 +13,7 @@ class StateList extends React.Component{
     }
 
     state = {
-        stores: [],
-        states: [],
-        modalShow: false
+        states: []
     }
 
     componentWillMount(){
@@ -37,7 +35,7 @@ class StateList extends React.Component{
     
 
     StateModal = () => {
-        const [show, setShow] = useState(false);
+        const [show, setShow] = useState(Cart.stateLocation ? false : true);
       
         const handleClose = () => setShow(false);
         const handleShow = () => setShow(true);
@@ -56,7 +54,7 @@ class StateList extends React.Component{
 
                 {this.state.states.length ? (
                     <select onChange={this.handleStateChange}>
-                        <option disabled defaultValue>Select State</option>
+                        <option selected="true" disabled="disabled">Select State</option>
                         {this.state.states.map((storeObj,index) => {
                             return (
                                 <option value={storeObj.name} key={index}>{storeObj}</option>

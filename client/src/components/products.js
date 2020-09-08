@@ -16,7 +16,7 @@ const Products = (data) => {
             return (
                 <ProductItem
                     key={index}
-                    props={entry}
+                    item={entry}
                 />
             )
           })}

@@ -68,15 +68,16 @@ const CheckoutForm = () => {
       // (e.g., a value of 99999999 for a USD charge of $999,999.99).
 
       //TODO: AMOUNT SHOULD BE VALIDATED
+      console.log(Cart.priceTotal)
       const amountToCharge = Cart.priceTotal.toString().replace('.','');
 
       let secret = null; 
       await API.getStripeSecret(amountToCharge)
-               .then(
-                  res => secret = res.data.client_secret
+                .then(
+                    res => secret = res.data.client_secret
                 ).catch(
-                 err => console.log(err)
-               );
+                    err => console.log(err)
+                );
 
       // IF SECRET IS A STRING - PROCEED PAYMENT
       if(secret){
@@ -141,7 +142,7 @@ const CheckoutForm = () => {
                 />
                 <div className="card-errors" role="alert">{error}</div>
             </div>
-            <button disabled={!stripe} className="stripe-button" type="submit">Submit Payment</button>
+          <button disabled={!stripe} className="stripe-button" type="submit">Submit Payment {Cart.priceTotal}</button>
         </form>
     );
 }

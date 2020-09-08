@@ -5,8 +5,8 @@ import Header from "./header";
 import Footer from "./footer";
 import "../index.css";
 import '../App.css';
-import CartButton from "./cart-button";
 import CartSection from "./cart-section";
+import Cart from "./cart"
 
 
 const Layout = ({ children }) => {
