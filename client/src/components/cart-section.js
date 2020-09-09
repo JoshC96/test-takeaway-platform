@@ -38,7 +38,8 @@ class CartSection extends React.Component{
         })
     }
 
-    handlePriceClick = event => this.toggleCartView();
+    // handlePriceClick = event => this.toggleCartView();
+    handlePriceClick = event => window.location.href = "/checkout";
     handleSubmit = event => {
         event.preventDefault()
         Cart.updateCart();

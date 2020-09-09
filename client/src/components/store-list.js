@@ -29,7 +29,9 @@ class StoreList extends React.Component{
     }
 
     handleLocationChange = (event) => {
-        Cart.location = event.target.value;
+        Cart.location = event.target.value.split(",")[0];
+        Cart.locationId = event.target.value.split(",")[1];
+        Cart.updateCart();
     };
     
     
@@ -39,9 +41,13 @@ class StoreList extends React.Component{
             {this.state.stores.length ? (
                 <select onChange={this.handleLocationChange}>
                     {this.state.stores.map((storeObj,index) => {
+
+                        let defaultValue=storeObj.id === parseInt(Cart.locationId) ? true : false;
+
                         return (
-                            <option value={storeObj.name} key={index}>{storeObj.name}</option>
+                            <option selected={defaultValue} value={storeObj.name+","+storeObj.id} key={index}>{storeObj.name}</option>
                         );
+
                     })}
                 </select>
             ) : (

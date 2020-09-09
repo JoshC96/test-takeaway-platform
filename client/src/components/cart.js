@@ -9,6 +9,7 @@ class CartClass extends Component {
         super(props);
         this.priceTotal = 0.0; // PRICES SHOULD BE FLOATS
         this.location = "";
+        this.locationId = "";
         this.stateLocation = ""; // DEFAULT STATE LOCATION
         this.pickUpTime = "";
         this.itemsInCart = props.itemsInCart; // ARRAY FROM DEFAULT PROPS
@@ -17,6 +18,7 @@ class CartClass extends Component {
         this.state = {
             priceTotal: this.priceTotal,
             location: this.location,
+            locationId: this.locationId,
             stateLocation: this.stateLocation,
             pickUpTime: this.pickUpTime,
             itemsInCart: this.itemsInCart,
@@ -133,6 +135,7 @@ class CartClass extends Component {
         let savedCartObject = {
             priceTotal:this.priceTotal,
             location: this.location,
+            locationId: this.locationId,
             stateLocation: this.stateLocation,
             pickUpTime: this.pickUpTime,
             itemsInCart: this.itemsInCart,
@@ -150,11 +153,25 @@ class CartClass extends Component {
             let savedCart = JSON.parse(Storage.getCart())
             this.priceTotal = savedCart.priceTotal;
             this.location = savedCart.location;
+            this.locationId = savedCart.locationId;
             this.stateLocation = savedCart.stateLocation;
             this.pickUpTime = savedCart.pickUpTime;
             this.itemsInCart = savedCart.itemsInCart;
             this.customer = savedCart.customer;
         }
+    }
+
+    resetCart = function(){
+        let savedCart = JSON.parse(Storage.getCart())
+        this.priceTotal = 0.0;
+        this.location = savedCart.location;
+        this.locationId = savedCart.locationId;
+        this.stateLocation = savedCart.stateLocation;
+        this.pickUpTime = "";
+        this.itemsInCart = [];
+        this.customer = savedCart.customer ? savedCart.customer : {};
+
+        this.saveCart();
     }
 
     // submitCartOrder() - SUBMITS CART TO KOUNTA ON SUCCESS OF STRIPE

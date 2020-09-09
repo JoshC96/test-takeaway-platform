@@ -68,8 +68,8 @@ const CheckoutForm = () => {
       // (e.g., a value of 99999999 for a USD charge of $999,999.99).
 
       //TODO: AMOUNT SHOULD BE VALIDATED
-      console.log(Cart.priceTotal)
-      const amountToCharge = Cart.priceTotal.toString().replace('.','');
+      console.log(parseFloat(Cart.priceTotal).toFixed(2).toString().replace('.',''))
+      const amountToCharge = parseFloat(Cart.priceTotal).toFixed(2).toString().replace('.','');
 
       let secret = null; 
       await API.getStripeSecret(amountToCharge)
@@ -85,20 +85,19 @@ const CheckoutForm = () => {
         const result = await stripe.confirmCardPayment(secret, {
           payment_method: {
             card: card,
-            billing_details: {
-              name: "Josh Test",
-            },
+            billing_details: Cart.customer
           }
         });
 
         if (result.error) {
             // Inform the user if there was an error.
             setError(result.error.message);
+            console.log(result.error.message)
         } else {
             setError(null);
             if (result.paymentIntent.status === 'succeeded') {
               window.location.href = "/order-confirmed";
-              // console.log(result);
+              console.log(result);
               // alert("successful payment")
             }
         }
@@ -127,9 +126,14 @@ const CheckoutForm = () => {
                 <label htmlFor="customer-number">
                   Email Address
                 </label>
-                <input id="customer-email" text="emial" name="customer-email" />
+                <input id="customer-email" text="email" name="customer-email" />
             </div>
-
+            <div className="form-row">
+                <label htmlFor="customer-pickup-time">
+                  Pick up time
+                </label>
+                <input id="customer-pickup-time" text="text" name="customer-pickup-time" />
+            </div>
             <CheckoutProducts />
 
             <div className="form-row">
@@ -143,7 +147,7 @@ const CheckoutForm = () => {
                 />
                 <div className="card-errors" role="alert">{error}</div>
             </div>
-          <button disabled={!stripe} className="stripe-button" type="submit">Submit Payment {Cart.priceTotal}</button>
+          <button disabled={!stripe} className="stripe-button" type="submit">Submit Payment ${parseFloat(Cart.priceTotal).toFixed(2)}</button>
         </form>
     );
 }
