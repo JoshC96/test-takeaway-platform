@@ -49,14 +49,7 @@ When the app routes to "/" or "/categories" the HomePage will be loaded, when an
 
 When a route doesn't exist the user sees 404 page, this is also great for security as the proxy for the server requests is harder to find. 
 
-
-
-## Sass commands
-
-Sass run command from ./client directory:
-
-```sass --watch styles:src```
-
+The Category page will filter products by STORE - if the store has no products, it will display as empty
 
 ## Craft Details
 
@@ -64,8 +57,13 @@ Sass run command from ./client directory:
 http://takeaway.nightfallstudios.com.au/
 
 Login Details: 
-admin
-f7y^$%XM8h7f
+Delicia
+20GAk7X01Roc
+
+
+## Sass commands
+
+Sass will run when npm run start has been run - found in package.json
 
 
 ## Server information found in server.js
