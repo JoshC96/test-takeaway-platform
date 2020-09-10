@@ -46,6 +46,12 @@ module.exports = {
           return product;
         }
       });
+      result = result.filter(product => {
+        if(product.category.id === req.query.categoryId){
+          return product;
+        }
+      });
+
       return res.json(result);
     });
   }

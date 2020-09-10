@@ -1,3 +1,5 @@
+import Cart from "../components/cart"
+
 const axios = require("axios");
 
 export default {
@@ -11,7 +13,8 @@ export default {
     return axios.get('/api/products/category?id='+id)
   },
   productsByStore: function(id) {
-    return axios.get('/api/products/store?storeId='+id)
+    let storeId = Cart.locationId ? Cart.locationId : 0;
+    return axios.get('/api/products/store?storeId='+storeId+'&categoryId='+id)
   },
   allCategories: function() {
     return axios.get('/api/categories')

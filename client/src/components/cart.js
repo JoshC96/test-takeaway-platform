@@ -32,8 +32,7 @@ class CartClass extends Component {
     // THIS WILL BE RUN EVERY TIME THE CART CHANGES TO UPDATE THE FINAL CART
     updateCart = function(){
 
-        // UPDATE THE CART TOOLBAR PRICE
-        
+        // window.location.reload(false);        
 
         // SET TEMP TOTAL
         let newTotal = 0.0;
@@ -72,6 +71,7 @@ class CartClass extends Component {
         this.itemsInCart.push(newProduct);
         // RUN UPDATE CART
         Cart.updateCart();
+        window.location.reload(false);
     }
 
     // removeFromCart() - REMOVES A PRODUCT FROM this.itemsInCart
@@ -82,6 +82,7 @@ class CartClass extends Component {
 
         // RUN UPDATE CART
         Cart.updateCart();
+        window.location.reload(false);
     }
 
     // createCartItem() - CREATES A CART ITEM TO STORE IN this.itemsInCart
@@ -191,9 +192,9 @@ CartClass.propTypes = {
 const defaultProps = {
     itemsInCart: [], 
     customer: {
-        name: "John Smith",
-        phone: "+614 1324 5798",
-        email: "test@test.com"
+        name: "",
+        phone: "",
+        email: ""
     }
 };
 

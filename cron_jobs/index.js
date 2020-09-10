@@ -23,6 +23,8 @@ cron.schedule("* * * * *", function() {
             if (err) throw err;
             console.log('Saved categories');
         });
+      }).catch(function(err){
+        console.log(err)
       });
 
     axiosInstance
@@ -32,6 +34,8 @@ cron.schedule("* * * * *", function() {
             if (err) throw err;
             console.log('Saved Extras');
         });
+      }).catch(function(err){
+        console.log(err)
       });
       
     axiosInstance
@@ -41,6 +45,8 @@ cron.schedule("* * * * *", function() {
             if (err) throw err;
             console.log('Saved Stores');
         });
+      }).catch(function(err){
+        console.log(err)
       });
     
 });

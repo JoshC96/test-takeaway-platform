@@ -31,6 +31,7 @@ class StateList extends React.Component{
     handleStateChange = (event) => {
         Cart.stateLocation = event.target.value
         Cart.saveCart();
+        window.location.reload(false);
     };
     
 

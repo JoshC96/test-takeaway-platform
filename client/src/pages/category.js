@@ -17,7 +17,8 @@ const CategoryPage = () => {
     }, [])
 
     function loadCategory(){
-        API.productsByCategory(categoryId)
+        // SEND CATEGORYID AS CART ID IS RETRIEVED IN FUNCTION
+        API.productsByStore(categoryId)
         .then(res => setProducts(res.data))
         .catch(err => console.log(err));
     };

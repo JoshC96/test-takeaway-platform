@@ -1,5 +1,5 @@
 // MODULES
-import React from 'react';
+import React, { createRef } from 'react';
 import API from "../routes/api"
 import Cart from "../components/cart"
 
@@ -41,6 +41,10 @@ const CheckoutForm = () => {
     const stripe = useStripe();
     const elements = useElements();
 
+    const emailRef = createRef();
+    const phoneRef = createRef();
+    const nameRef = createRef();
+
     // Handle real-time validation errors from the card Element.
     const handleChange = (event) => {
         if (event.error) {
@@ -53,6 +57,10 @@ const CheckoutForm = () => {
     // Handle form submission.
     const handleSubmit = async (event) => {
       event.preventDefault();
+
+      Cart.customer.email = emailRef.current.value ? emailRef.current.value : "";
+      Cart.customer.phone = phoneRef.current.value ? phoneRef.current.value : "";
+      Cart.customer.name = nameRef.current.value ? nameRef.current.value : "";
 
       if (!stripe || !elements) {
         // Stripe.js has not yet loaded.
@@ -98,7 +106,6 @@ const CheckoutForm = () => {
             if (result.paymentIntent.status === 'succeeded') {
               window.location.href = "/order-confirmed";
               console.log(result);
-              // alert("successful payment")
             }
         }
       }
@@ -109,30 +116,24 @@ const CheckoutForm = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className="checkout-form" onSubmit={handleSubmit}>
             <div className="form-row">
                 <label htmlFor="customer-name">
                     Full Name
                 </label>
-                <input id="customer-name" type="text" name="customer-name" />
+                <input ref={nameRef} id="customer-name" required type="text" name="customer-name" />
             </div>
             <div className="form-row">
                 <label htmlFor="customer-number">
-                    Phone Number
+                  Phone Number
                 </label>
-                <input id="customer-number" text="number" name="customer-number" />
+                <input ref={phoneRef} id="customer-number" text="number" name="customer-number" />
             </div>
             <div className="form-row">
                 <label htmlFor="customer-number">
                   Email Address
                 </label>
-                <input id="customer-email" text="email" name="customer-email" />
-            </div>
-            <div className="form-row">
-                <label htmlFor="customer-pickup-time">
-                  Pick up time
-                </label>
-                <input id="customer-pickup-time" text="text" name="customer-pickup-time" />
+                <input ref={emailRef} required id="customer-email" text="email" name="customer-email" />
             </div>
             <CheckoutProducts />
 

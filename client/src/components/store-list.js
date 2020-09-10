@@ -32,6 +32,7 @@ class StoreList extends React.Component{
         Cart.location = event.target.value.split(",")[0];
         Cart.locationId = event.target.value.split(",")[1];
         Cart.updateCart();
+        window.location.reload(false);
     };
     
     
