@@ -12,7 +12,7 @@ app.use(express.json());
 // Add routes, both API and view
 app.use(routes);
 
-// Serve up static assets
+// Serve React app
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
