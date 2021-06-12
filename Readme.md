@@ -62,10 +62,6 @@ The Category page will filter products by STORE - if the store has no products, 
 ### API routes are set up to make API requests to this url:
 http://takeaway.nightfallstudios.com.au/
 
-Login Details: 
-Delicia
-20GAk7X01Roc
-
 To add a new product, login and find "Entries" on the left side. This is where almost everything should be done. Add a new product by going to "Products" in the second left-side menu, and selecting the red "New Entry" button on the right side.
 
 When adding a new product you'll need to enter at least a title, price, and menu category. Otherwise it won't show correctly. Add ons are for things like milk type, syrup, and sizes for drinks.
